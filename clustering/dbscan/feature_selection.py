@@ -87,8 +87,8 @@ if __name__ == "__main__":
     feat_importance(df)
     # Most important: koi_score, koi_fpflag_ss, koi_fpflag_nt, koi_fpflag_ec, koi_fpflag_co, koi_depth, koi_period, koi_teq, koi_model_snr 
     # Output CSV with most important features
-    with_score = df[["koi_score", "koi_fpflag_ss", "koi_fpflag_nt", "koi_fpflag_ec", "koi_fpflag_co", "koi_depth", "koi_period", "koi_teq", "koi_model_snr"]]
-    wo_score = df[["koi_fpflag_ss", "koi_fpflag_nt", "koi_fpflag_ec", "koi_fpflag_co", "koi_depth", "koi_period", "koi_teq", "koi_model_snr"]]
+    with_score = df[["koi_pdisposition", "koi_score", "koi_fpflag_ss", "koi_fpflag_nt", "koi_fpflag_ec", "koi_fpflag_co", "koi_depth", "koi_period", "koi_teq", "koi_model_snr"]]
+    wo_score = df[["koi_pdisposition", "koi_fpflag_ss", "koi_fpflag_nt", "koi_fpflag_ec", "koi_fpflag_co", "koi_depth", "koi_period", "koi_teq", "koi_model_snr"]]
 
     with_score.to_csv("../../data/exoplanet_cleanedrf_w_score.csv", index=False)
     wo_score.to_csv("../../data/exoplanet_cleanedrf.csv", index=False)
