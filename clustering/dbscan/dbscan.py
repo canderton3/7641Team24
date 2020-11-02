@@ -32,23 +32,30 @@ def dbscan(X, y):
     # Recombine
     X = np.concatenate((binary_vars, scaled_numeric), axis = 1)
 
-    # Compute DBSCAN
-    db = DBSCAN(eps=0.7, min_samples=15).fit(X)
-    labels = db.labels_
-    print("NEW LABELS: ", max(labels))
-    # Number of clusters in labels, ignoring noise if present.
-    n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
-    n_noise_ = list(labels).count(-1)
-
-    print('Estimated number of clusters: %d' % n_clusters_)
-    print('Estimated number of noise points: %d' % n_noise_)
-    print("Homogeneity: %0.3f" % metrics.homogeneity_score(y, labels))
-    print("Completeness: %0.3f" % metrics.completeness_score(y, labels))
-    print("Adjusted Mutual Information: %0.3f"
-        % metrics.adjusted_mutual_info_score(y, labels))
-    print("Silhouette Coefficient: %0.3f"
-        % metrics.silhouette_score(X, labels))
-
+    flag = True
+    sils = []
+    ep = 0.5
+    min_samples = 5
+    while (flag):
+        # Compute DBSCAN
+        db = DBSCAN(eps=ep, min_samples=min_samples).fit(X)
+        labels = db.labels_
+        sils.append(metrics.silhouette_score(X, labels))
+        print("Silhouette Coefficient: %0.3f"
+            % metrics.silhouette_score(X, labels))
+        ep += 0.1
+        min_samples += 1
+        if (min_samples > 15):
+            break
+    
+    # Plot Silhouette Coefficients
+    eps = [0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5]
+    mins = [i for i in range(5, 16)]
+    sil_ep = plt.plot(eps, sils)
+    sil_mins = plt.plot(mins, sils)
+    plt.show()
+    #sil_ep.get_figure().savefig('sil_ep.png')
+    #sil_mins.get_figure().savefig('sil_mins.png')
     # Find percent candidate / false positive in each cluster
     for i in range (max(labels) + 1):
         points_in_cluster = X[np.where(labels == i)]
