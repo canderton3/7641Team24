@@ -85,33 +85,6 @@ Density-Based Spatial Clustering of Applications with Noise (DBSCAN) is a non-pa
 --number of cluster
 --number of candidate / false positive exoplanets in each cluster
 ## K-means
-#### Using Top 10 Features
-**Parameter Values:** K clusters = 4 
-
-| Cluster Number | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
-|---|---|---|---|
-| 0 | 42 | 1765 | 2% |
-| 1 | 0 | 1213 | 0.03% |
-| 2 | 0 | 1| 0% |
-| 3 | 3987 | 1350 | 75% |
-
-![](images/kmeans_top_10.png)
-
-#### Using Top 5 Features
-
-**Parameter Values:** K clusters = 6
-
-| Cluster Number | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
-|---|---|---|---|
-| 0 | 8 | 495 | 1.5% |
-| 1 | 46 | 1229 | 3% |
-| 2 | 1 | 11 | 8% |
-| 3 | 3820 | 1082| 78%% |
-| 4 | 153 | 1142 | 12% |
-| 5 | 1 | 6 | 14% |
-
-![](images/kmeans_top_5_cluster.png)
-
 ### Result
 ## Gaussian Mixture Modeling
 ### Result
@@ -129,6 +102,70 @@ As the above figure highlights, 2 clusters is approximately when the AIC/BIC beg
 
 ## Hierarchical Clustering
 ### Result
+Below is the constructed dendrogram on our scaled dataset using a ward linkage for both our top five most important features and top 10 most important features. Using top five features:
+
+![](images/dendrogram_five.png)
+
+Now, using top 10 features:
+
+![](images/dendrogram_ten.png)
+
+As mentioned briefly in the methods section, we decided to determine the optimal number of clusters by calculating the silhouette score for clustering from six to 25 clusters. Here is a graphical representation of those scores for each of our clusters. First for the five-feature dataset:
+
+![](images/silhouette_scores_five.png)
+
+And the 10-feature dataset:
+
+![](images/silhouette_scores_ten.png)
+
+By locating the maximum silhouette score for each dataset, we determine that our optimal number of clusters is 17 for our top five features with a silhouette score of 0.937 and 11 for our top 10 features with a silhouette score of 0.309. We can then move to reducing our datasets to two principal components using PCA so that we can graphically represent our clustering. Below is the result of our PCA analysis. First is the graph for our top five dataset:
+
+![](images/hier_PCA_five.png)
+
+And top 10:
+
+![](images/hier_PCA_ten.png)
+
+Lastly, we can directly calculate the number of candidate and false positive exoplanets in each of our clusters. Below is the tabular representation of this breakup for the top five features:
+
+| Cluster Number | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
+|---|---|---|---|
+| 0 | 41 | 1342 | 0.03% |
+| 1 | 0 | 596 | 0% |
+| 2 | 0 | 49 | 0% |
+| 3 | 0 | 458 | 0% |
+| 4 | 3987 | 0 | 100% |
+| 5 | 0 | 162 | 0% |
+| 6 | 1 | 17 | 0.056% |
+| 7 | 0 | 105 | 0% |
+| 8 | 0 | 313 | 0% |
+| 9 | 0 | 5 | 0% |
+| 10 | 0 | 312 | 0% |
+| 11 | 0 | 366 | 0% |
+| 12 | 0 | 113 | 0% |
+| 13 | 0 | 53 | 0% |
+| 14 | 0 | 72 | 0% |
+| 15 | 0 | 1 | 0% |
+| 16 | 0 | 1 | 0% |
+
+For the top 10 features dataset:
+
+| Cluster Number | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
+|---|---|---|---|
+| 0 | 24 | 1735 | 0.014% |
+| 1 | 56 | 924 | 0.057% |
+| 2 | 3910 | 480 | 0.891% |
+| 3 | 10 | 113 | 0.081% |
+| 4 | 0 | 170 | 0% |
+| 5 | 0 | 1 | 0% |
+| 6 | 24 | 218 | 0.099% |
+| 7 | 1 | 1 | 0.5% |
+| 8 | 0 | 4 | 0% |
+| 9 | 1 | 13 | 0.071% |
+| 10 | 3 | 306 | 0.010% |
+
+For both datasets, we have a cluster that returns a majority of candidate exoplanets. Regarding the top five dataset, cluster four contains 3987 candidate planets and no false positives, while the top 10 dataset's cluster two contains 3910 candidate planents and only 480 false positives. 
+
 ## DBSCAN
 ### Result
 #### Using Top 10 Features
