@@ -32,7 +32,7 @@ def dbscan(X, y):
     flag = True
     sils = []
     ep = 0.5
-    min_samples = 10
+    min_samples = 6
     # Compute DBSCAN
     db = DBSCAN(eps=ep, min_samples=min_samples).fit(X)
     labels = db.labels_
@@ -78,5 +78,5 @@ def plot_dbscan(X, y, dbscan_labels):
 if __name__ == "__main__":
     top_10, top_5, labels = load_data()
     print(labels)
-    dbscan(top_10, labels)
+    dbscan(top_5, labels)
 
