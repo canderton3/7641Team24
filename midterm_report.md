@@ -91,7 +91,9 @@ Density-Based Spatial Clustering of Applications with Noise (DBSCAN) is a non-pa
 In order to choose the correct number of clusters for the K-means algorithim, the team plotted an elbow curve over both the top 10 and top 5 features. We then ran an elbow identifying function to find the most significant number of clusters to use.
 
 #### Using Top 10 Features
+
 ![](images/top10_elbow.png)
+
 **Parameter Values:** K clusters = 4 
 
 | Cluster Number | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
@@ -104,7 +106,9 @@ In order to choose the correct number of clusters for the K-means algorithim, th
 ![](images/kmeans_top_10.png)
 
 #### Using Top 5 Features
+
 ![](images/top5_elbow.png)
+
 **Parameter Values:** K clusters = 6
 
 | Cluster Number | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
