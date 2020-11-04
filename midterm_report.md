@@ -85,6 +85,14 @@ In order to evaluate quality of a model’s fit the team used two techniques. Th
 
 ![](images/gmm.gif)
 
+However, we used the AIC/BIC criterion to determine the best number of clusters to use. Below is a graph comparing number of clusters to criterion number, with the “elbow/best #” highlighted:
+
+![](images/aic_bic_gmm.png)
+
+As the above figure highlights, 2 clusters is approximately when the AIC/BIC begins indicating 2 clusters is ideal for this model. Below is the figure displaying the model with just two clusters:
+
+![](images/gmm_2_cluster.png)
+
 ### Result
 ## Hierarchical Clustering
 ### Result
