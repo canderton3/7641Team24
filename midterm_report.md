@@ -66,7 +66,7 @@ In order to evaluate quality of a model’s fit the team used two techniques. Th
 
 ### Hierarchical Clustering
 ### Density-Based Spatial Clustering of Applications with Noise (DBSCAN)
-Density-Based Spatial Clustering of Applications with Noise (DBSCAN) is a non-parametric, density-based clustering algorithm. DBSCAN detects arbitrarily shaped clusters in the data, where a cluster is defined as a maximal set of density-connected points. A point is described as being a part of a cluster if it is within a core point's \epsilon-neighborhood, which means the data point is within the distance \epsilon from the core point. In order to be called a cluster instead of outliers, each cluster must contain at least a minimum number of samples. The two parameters we tuned to create our ideal DBSCAN model were \epsilon and the minimum number of samples for a group of points to be defined as a cluster.
+Density-Based Spatial Clustering of Applications with Noise (DBSCAN) is a non-parametric, density-based clustering algorithm. DBSCAN detects arbitrarily shaped clusters in the data, where a cluster is defined as a maximal set of density-connected points. A point is described as being a part of a cluster if it is within a core point's &epsilon;-neighborhood, which means the data point is within the distance &epsilon; from the core point. In order to be called a cluster instead of outliers, each cluster must contain at least a minimum number of samples. The two parameters we tuned to create our ideal DBSCAN model were \epsilon and the minimum number of samples for a group of points to be defined as a cluster.
 
 
 ## Supervised
@@ -97,7 +97,7 @@ As the above figure highlights, 2 clusters is approximately when the AIC/BIC beg
 ## DBSCAN
 ### Result
 #### Using Top 10 Features
-**Parameter Values:** \epsilon = 1, min_samples = 15
+**Parameter Values:** &epsilon; = 1, min_samples = 15
 | Cluster Number | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
 |---|---|---|---|
 | 0 | 3967 | 0 | 100% |
@@ -115,7 +115,7 @@ As the above figure highlights, 2 clusters is approximately when the AIC/BIC beg
 
 ![](images/dbscan_clusters_top10.png)
 #### Using Top 5 Features
-**Parameter Values:** \epsilon = 0.5, min_samples = 6
+**Parameter Values:** &epsilon; = 0.5, min_samples = 6
 
 | Cluster Number | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
 |---|---|---|---|
