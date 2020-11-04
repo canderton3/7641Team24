@@ -57,6 +57,8 @@ By just taking the top ten features, we cut our number of features in half. Howe
 call out features of clusters that indicate candidates (process and describe some math, Why)
 ## Unsupervised
 ### K-means
+K-Means is a clustering algorithm that groups points around a selected K number of centroids. The team used an elbow graph in order to identify what the best number of K is.
+
 ### Gaussian Mixture Modeling
 Gaussian Mixture Modeling results on the exoplanets data still required some data preparation before final results could be interpreted. The primary method the team used to analyze results with GMM was to normalize all non-binary data using StandardScaler(). Once we concatenated all of the team’s data back together, the team then generated a scipy GMM model with the normalized data.
 	
