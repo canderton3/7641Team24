@@ -79,6 +79,7 @@ Density-Based Spatial Clustering of Applications with Noise (DBSCAN) is a non-pa
 ## K-means
 ### Result
 ## Gaussian Mixture Modeling
+### Result
   The team found that, using the Gaussian Mixture Model, that 2 clusters was the ideal way to classify potential exoplanets with our chosen features. See below for a GIF of the first two PCA columns being assigned to various clusters for a brief understanding of how our algorithm works:
 
 ![](images/gmm.gif)
@@ -91,7 +92,6 @@ As the above figure highlights, 2 clusters is approximately when the AIC/BIC beg
 
 ![](images/gmm_2_cluster.png)
 
-### Result
 ## Hierarchical Clustering
 ### Result
 ## DBSCAN
