@@ -80,14 +80,8 @@ Density-Based Spatial Clustering of Applications with Noise (DBSCAN) is a non-pa
 ## Supervised
 ### TODO: Steps Moving Forward
 
-# Results
---silhouette coefficient 
---number of cluster
---number of candidate / false positive exoplanets in each cluster
 ## K-means
 ### Result
-
-## K-means
 In order to choose the correct number of clusters for the K-means algorithim, the team plotted an elbow curve over both the top 10 and top 5 features. We then ran an elbow identifying function to find the most significant number of clusters to use.
 
 #### Using Top 10 Features
