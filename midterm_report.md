@@ -85,6 +85,40 @@ Density-Based Spatial Clustering of Applications with Noise (DBSCAN) is a non-pa
 --number of cluster
 --number of candidate / false positive exoplanets in each cluster
 ## K-means
+#### Using Top 10 Features
+![](images/kmeans_clusters_top_10.png)
+**Parameter Values:** &epsilon; = 1, min_samples = 15
+| Cluster Number | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
+|---|---|---|---|
+| 0 | 3967 | 0 | 100% |
+| 1 | 39 | 1213 | 0.03% |
+| 2 | 0 | 298 | 0% |
+| 3 | 0 | 306 | 0% |
+| 4 | 0 | 449 | 0% |
+| 5 | 0 | 525 | 0% |
+| 6 | 0 | 103 | 0% |
+| 7 | 0 | 360 | 0% |
+| 8 | 0 | 153 | 0% |
+| 9 | 0 | 63 | 0% |
+| 10 | 0 | 104 | 0% |
+| 11 | 0 | 41 | 0% |
+#### Using Top 5 Features
+![](images/kmeans_clusters_top_5.png)
+**Parameter Values:** &epsilon; = 1, min_samples = 15
+| Cluster Number | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
+|---|---|---|---|
+| 0 | 3967 | 0 | 100% |
+| 1 | 39 | 1213 | 0.03% |
+| 2 | 0 | 298 | 0% |
+| 3 | 0 | 306 | 0% |
+| 4 | 0 | 449 | 0% |
+| 5 | 0 | 525 | 0% |
+| 6 | 0 | 103 | 0% |
+| 7 | 0 | 360 | 0% |
+| 8 | 0 | 153 | 0% |
+| 9 | 0 | 63 | 0% |
+| 10 | 0 | 104 | 0% |
+| 11 | 0 | 41 | 0% |
 ### Result
 ## Gaussian Mixture Modeling
 ### Result
