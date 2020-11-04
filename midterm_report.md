@@ -82,7 +82,8 @@ In order to evaluate quality of a model’s fit the team used two techniques. Th
 ### Result
 ## Gaussian Mixture Modeling
   The team found that, using the Gaussian Mixture Model, that 2 clusters was the ideal way to classify potential exoplanets with our chosen features. See below for a GIF of the first two PCA columns being assigned to various clusters for a brief understanding of how our algorithm works:
-  
+![](images/gmm.gif)
+
 ### Result
 ## Hierarchical Clustering
 ### Result
