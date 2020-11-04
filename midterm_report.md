@@ -20,7 +20,7 @@ Before dropping any columns, 36 columns contained at least some NaN values. This
 
 After dropping the categorical columns, we still had the NaN problem. There were two columns, koi_teq_err1 and koi_teq_err2 that had no values for any data points, so those were dropped. Then, we reached a spot in our data cleaning process where some decisions had to be made. Most of the continuous columns had err1 and err2 values, which were essentially the confidence interval range for the actual value measured for the column. For example, if koi_depth was 2, err1 could be 1, and err2 could be -0.5, telling us that the actual bounds for koi_depth were between [1.5, 3]. We considered having different columns for upper and lower bounds, but didn't see that the information added by that would be exceedingly helpful. Because of this we chose to essentially ignore all of the error columns and keep the measured values. After doing this, we removed the data points that still contained NaN values. We decided to not impute the missing values due to the variation between the physical characteristics of all of the data points.
 
-Cleaning the data of NaN values and unnecessary columns reduced our dataset to 22 columns and nearly 8000 data points. 8000 data points is plenty to use for our purposes. 
+Cleaning the data of NaN values and unnecessary columns reduced our dataset to 22 columns and nearly 8000 data points. We are confident that 8000 data points is enough for a successful and generalized classification model.
 
 **Note:** The feature koi_score was not removed during the cleaning process, but we chose to not include it in our final list of features. The definition of this 
 feature is "a value between 0 and 1 that indicates the confidence in the KOI disposition. For CANDIDATEs, a higher value indicates more confidence in its disposition, while for FALSE POSITIVEs, a higher value indicates less confidence in that disposition. The value is calculated from a Monte Carlo technique such that the score's value is equivalent to the frction of iterations where the Robovetter yields a disposition of CANDIDATE." Thus, the koi_score is directly linked to the koi_pdisposition of the data point, our target variable, using complex mathmatical methods. Because of this direct correlation, and the fact that it is not a physical characteristc of the exoplanet, we have chosen to disregard it from consideration for features.
@@ -66,7 +66,7 @@ In order to evaluate quality of a model’s fit the team used two techniques. Th
 
 ### Hierarchical Clustering
 ### Density-Based Spatial Clustering of Applications with Noise (DBSCAN)
-Density-Based Spatial Clustering of Applications with Noise (DBSCAN) is a non-parametric, density-based clustering algorithm. DBSCAN detects arbitrarily shaped clusters in the data, where a cluster is defined as a maximal set of density-connected points. 
+Density-Based Spatial Clustering of Applications with Noise (DBSCAN) is a non-parametric, density-based clustering algorithm. DBSCAN detects arbitrarily shaped clusters in the data, where a cluster is defined as a maximal set of density-connected points. A point is described as being a part of a cluster if it is within a core point's \epsilon-neighborhood, which means the data point is within the distance \epsilon from the core point. In order to be called a cluster instead of outliers, each cluster must contain at least a minimum number of samples. The two parameters we tuned to create our ideal DBSCAN model were \epsilon and the minimum number of samples for a group of points to be defined as a cluster.
 
 
 ## Supervised
@@ -96,6 +96,43 @@ As the above figure highlights, 2 clusters is approximately when the AIC/BIC beg
 ### Result
 ## DBSCAN
 ### Result
+#### Using Top 10 Features
+**Parameter Values:** \epsilon = 1, min_samples = 15
+| Cluster Number | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
+|---|---|---|---|
+| 0 | 3967 | 0 | 100% |
+| 1 | 39 | 1213 | 0.03% |
+| 2 | 0 | 298 | 0% |
+| 3 | 0 | 306 | 0% |
+| 4 | 0 | 449 | 0% |
+| 5 | 0 | 525 | 0% |
+| 6 | 0 | 103 | 0% |
+| 7 | 0 | 360 | 0% |
+| 8 | 0 | 153 | 0% |
+| 9 | 0 | 63 | 0% |
+| 10 | 0 | 104 | 0% |
+| 11 | 0 | 41 | 0% |
+
+![](images/dbscan_clusters_top10.png)
+#### Using Top 5 Features
+**Parameter Values:** \epsilon = 0.5, min_samples = 6
+
+| Cluster Number | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
+|---|---|---|---|
+| 0 | 3986 | 0 | 100% |
+| 1 | 41 | 1377 | 0.03% |
+| 2 | 0 | 314 | 0% |
+| 3 | 0 | 322 | 0% |
+| 4 | 0 | 458 | 0% |
+| 5 | 0 | 601 | 0% |
+| 6 | 0 | 113 | 0% |
+| 7 | 0 | 366 | 0% |
+| 8 | 0 | 155 | 0% |
+| 9 | 0 | 72 | 0% |
+| 10 | 0 | 105 | 0% |
+| 11 | 0 | 52 | 0% |
+
+![](images/dbscan_clusters_top5.png)
 
 
 # Discussion
