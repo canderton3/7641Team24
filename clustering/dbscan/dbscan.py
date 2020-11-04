@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 #sklearn imports
 from sklearn.cluster import DBSCAN
 from sklearn.decomposition import PCA #Principal Component Analysis
@@ -9,20 +10,16 @@ from sklearn.cluster import KMeans #K-Means Clustering
 from sklearn.preprocessing import StandardScaler #used for 'Feature Scaling'
 from sklearn import metrics
 
-#plotly imports
-import plotly as py
-import plotly.graph_objs as go
-from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 
 def load_data():
-    w_score = pd.read_csv(r"../../data/exoplanet_cleanedrf_w_score.csv").to_numpy()
-    no_score = pd.read_csv(r"../../data/exoplanet_cleanedrf.csv").to_numpy()
+    top_5 = pd.read_csv(r"../../data/exoplanet_cleanedrf_top_5.csv").to_numpy()
+    top_10 = pd.read_csv(r"../../data/exoplanet_cleanedrf_top_10.csv").to_numpy()
     # Get Labels
-    labels = no_score[:, 0]
+    labels = top_5[:, 0]
     # Delete Labels from data
-    w_score = np.delete(w_score, 0, axis=1)
-    no_score = np.delete(no_score, 0, axis=1)
-    return w_score, no_score, labels
+    top_10 = np.delete(top_10, 0, axis=1)
+    top_5 = np.delete(top_5, 0, axis=1)
+    return top_10, top_5, labels
 
 def dbscan(X, y):
     binary_vars = X[:, :4]
@@ -35,27 +32,12 @@ def dbscan(X, y):
     flag = True
     sils = []
     ep = 0.5
-    min_samples = 5
-    while (flag):
-        # Compute DBSCAN
-        db = DBSCAN(eps=ep, min_samples=min_samples).fit(X)
-        labels = db.labels_
-        sils.append(metrics.silhouette_score(X, labels))
-        print("Silhouette Coefficient: %0.3f"
-            % metrics.silhouette_score(X, labels))
-        ep += 0.1
-        min_samples += 1
-        if (min_samples > 15):
-            break
-    
-    # Plot Silhouette Coefficients
-    eps = [0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5]
-    mins = [i for i in range(5, 16)]
-    sil_ep = plt.plot(eps, sils)
-    sil_mins = plt.plot(mins, sils)
-    plt.show()
-    #sil_ep.get_figure().savefig('sil_ep.png')
-    #sil_mins.get_figure().savefig('sil_mins.png')
+    min_samples = 10
+    # Compute DBSCAN
+    db = DBSCAN(eps=ep, min_samples=min_samples).fit(X)
+    labels = db.labels_
+    print("Silhouette Coefficient: %0.3f" % metrics.silhouette_score(X, labels))
+ 
     # Find percent candidate / false positive in each cluster
     for i in range (max(labels) + 1):
         points_in_cluster = X[np.where(labels == i)]
@@ -66,7 +48,7 @@ def dbscan(X, y):
         print(frequencies)
 
 
-    #plot_dbscan(X=X, y=y, dbscan_labels=labels)
+    plot_dbscan(X=X, y=y, dbscan_labels=labels)
 
 
 def plot_dbscan(X, y, dbscan_labels):
@@ -74,6 +56,9 @@ def plot_dbscan(X, y, dbscan_labels):
     pca = PCA(n_components=2)
     x = pca.fit_transform(X)
     # Plot each cluster
+    fig = plt.figure()
+    ax = plt.axes()
+
     num_clusters = max(dbscan_labels) + 1
     for i in range(num_clusters):
         points_in_cluster = x[np.where(dbscan_labels == i)]
@@ -81,15 +66,17 @@ def plot_dbscan(X, y, dbscan_labels):
         rgb = (np.random.random(), np.random.random(), np.random.random())
         for j in range(points_in_cluster.shape[0]):
             if (labels[j] == "CANDIDATE"):  
-                plt.scatter(points_in_cluster[j, 0], points_in_cluster[j, 1], c=[rgb], marker='*')
+                ax.scatter(points_in_cluster[j, 0], points_in_cluster[j, 1], c=[rgb], marker='*')
             else:
-                plt.scatter(points_in_cluster[j, 0], points_in_cluster[j, 1], c=[rgb], marker=',')
+                ax.scatter(points_in_cluster[j, 0], points_in_cluster[j, 1], c=[rgb], marker='.')
         print("CLUSTER ", i)
-    print("finished")
+    ax.set_title("DBSCAN Clusters, First Two PCA Components")
+    ax.set_xlabel("PCA Component 2")
+    ax.set_ylabel("PCA Component 1")
     plt.show()
 
 if __name__ == "__main__":
-    w_score, no_score, labels = load_data()
+    top_10, top_5, labels = load_data()
     print(labels)
-    dbscan(no_score, labels)
+    dbscan(top_10, labels)
 

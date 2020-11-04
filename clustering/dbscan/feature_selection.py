@@ -94,6 +94,7 @@ def rf(df):
     ax = plt.axes()
     rf_importance_plt = feat_importances.nlargest(10).plot(kind='barh', ax = ax)
     ax.set_title("Random Forest Feature Importance")
+    ax.set_xlabel("Feature Importance")
     plt.show()
     print("RF IMPORTANT FEATURES: ", feature_importance)
     print("MOST IMPORTANT FEATURES: ", most_important_features)

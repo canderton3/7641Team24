@@ -14,6 +14,7 @@ Thankfully the dataset came with a thorough data dictionary, linked [here](https
 
 ## Data Cleaning and Preparation
 This dataset was relatively easy to clean-there was no aggregation to be done or significant issues to handle. The main issues were NaN values and feature selection.
+
 ### Cleaning
 Before dropping any columns, 36 columns contained at least some NaN values. This obviously was not going to be helpful for our purposes, but we didn't necessarily want to just drop all 36 columns. We first removed essentially all columns that weren't physical characteristics of the object of interest, excepting the label koi_pdisposition. This includes the exoplanet's id and name(s).
 
@@ -24,8 +25,14 @@ After dropping the categorical columns, we still had the NaN problem. There were
 Cleaning the data of NaN values and unnecessary columns reduced our dataset to 22 columns and nearly 8000 data points. 8000 data points is plenty to use for our purposes. 
 
 ### Feature Selection Methods
-After cleaning the dataset, we were left with 22 features. Since we are focusing on physical characteristics, it is very probable that there are highly correlated variables. We checked this by visualizing the Pearson correlation between each feature. 
+#### Visualizing the Pearson Correlation Coefficient Between Pairs of Features
+After cleaning the dataset, we were left with 22 features. Since we are focusing on physical characteristics, it is very probable that there are highly correlated variables. We checked this by visualizing the Pearson correlation between each feature. The Pearson correlation coefficient values are between +1 and -1; +1 denotes a strong positive correlation while -1 denotes a strong negative correlation. Using the python visualization library seaborn, we created a heatmap illustrating the Pearson correlation between each variable. 
 
+![](images/pearson.png)
+
+As seen in the Pearson correlation, we have a few semi-correlated features, seen by the darker red and blue colors in the heatmap. However, most of the features are not highly correlated, if at all.
+
+#### Random Forest to Determine Feature Importance
 
 # Methods
 call out features of clusters that indicate candidates (process and describe some math, Why)
