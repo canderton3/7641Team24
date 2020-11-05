@@ -57,6 +57,10 @@ By just taking the top ten features, we cut our number of features in half. Howe
 call out features of clusters that indicate candidates (process and describe some math, Why)
 ## Unsupervised
 ### K-means
+K-means is a clustering algorithm that groups points around a selected K number of centroids. K-means requires a predetermined value of K. The K-means algorithim iteratively assign's data points to the nearest centroid, then moves the centroid assignment to the average of the points assigned to it. This process continues until the algorithim converges. 
+
+Our team tuned our K-means model based on finding the optimal K in an elbow curve graph. The elbow curve graph calculates the sum of square distances from each point and the centroid that the point is assigned to. This calculation is done over a range of K centroids. The range we selected was from 1-15 centroids. The sum of squared distances (or errors) is then ploted on a graph. Next, we ran a function to identify the point of inflection on the curve, known as the "elbow". This value is then used as the value of K for our K-means algorithim.
+
 ### Gaussian Mixture Modeling
 Gaussian Mixture Modeling results on the exoplanets data still required some data preparation before final results could be interpreted. The primary method the team used to analyze results with GMM was to normalize all non-binary data using StandardScaler(). Once we concatenated all of the team’s data back together, the team then generated a scipy GMM model with the normalized data.
 	
@@ -65,6 +69,12 @@ From this model the team was able to generate predicted labels and probabilities
 In order to evaluate quality of a model’s fit the team used two techniques. The first method was to compare our predicted labels to the true labels provided by the kepler dataset. This provided a simple standard error percentage we could use to determine the effectiveness of our algorithm. The team opted to not use the sum of the squares ANOVA method because it would prove to yield the same results as our previous method due to the nature of the binary prediction. The second method the team used to determine the best model/best number of clusters was with the AIC & BIC selection criterion. Graphs comparison the AIC/BIC to number of clusters are shown in the results section of GMM. The “best” model was selected on the elbow of the AIC/BIC graph.
 
 ### Hierarchical Clustering
+One form of unsupervised learning we wanted to conduct on our dataset is hierarchical clustering. This form of clustering, known as bottom-up agglomerative clustering, starts by considering each object as its own cluster. It will then repeatedly join the ‘most similar’ pair of clusters, and will merge it into a parent cluster. This process repeats until there is only one cluster left.
+
+Therefore, a question that arises is, if we have to determine similar clusters, how do we define that similarity? In our implementation, we chose a ‘ward’ linkage, which minimizes the variance of clusters being merged. Like our other unsupervised methods, we standardized our non-binary variables for both a dataset with the top five most important features and top ten most important features. A dendrogram was created to visualize this linkage for both datasets. Then, to determine where to make our ‘cut’ on the dendrogram for each of our datasets, we calculated the silhouette score for clustering from six to 25 clusters (clustering was done using sklearn’s AgglomerativeClustering function), selecting our optimal number of clusters that maximizes the silhouette score. 
+
+A silhouette score measures how close points are to their own clusters but far from other clusters, and a score close to one implies good clustering. Please reference the results section for our outcome in determining the optimal number of clusters for each dataset. Like our other methods, we can then visualize this clustering by plotting the clusters using PCA, and also determine how many candidate planets and false positives reside in each cluster. Results of this analysis can be found in the results section as well. 
+
 ### Density-Based Spatial Clustering of Applications with Noise (DBSCAN)
 Density-Based Spatial Clustering of Applications with Noise (DBSCAN) is a non-parametric, density-based clustering algorithm. DBSCAN detects arbitrarily shaped clusters in the data, where a cluster is defined as a maximal set of density-connected points. A point is described as being a part of a cluster if it is within a core point's &epsilon;-neighborhood, which means the data point is within the distance &epsilon; from the core point. In order to be called a cluster instead of outliers, each cluster must contain at least a minimum number of samples. The two parameters we tuned to create our ideal DBSCAN model were \epsilon and the minimum number of samples for a group of points to be defined as a cluster.
 
@@ -73,15 +83,46 @@ We implemented DBSCAN using python's scikit-learn (sklearn) library, which has a
 ## Supervised
 ### TODO: Steps Moving Forward
 
-# Results
---silhouette coefficient 
---number of cluster
---number of candidate / false positive exoplanets in each cluster
 ## K-means
 ### Result
+In order to choose the correct number of clusters for the K-means algorithim, the team plotted an elbow curve over both the top 10 and top 5 features. We then ran an elbow identifying function to find the most significant number of clusters to use.
+
+#### Using Top 10 Features
+
+![](images/top10_elbow.png)
+
+**Parameter Values:** K clusters = 4 
+
+| Cluster Number | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
+|---|---|---|---|
+| 0 | 42 | 1765 | 2% |
+| 1 | 0 | 1213 | 0.03% |
+| 2 | 0 | 1| 0% |
+| 3 | 3987 | 1350 | 75% |
+
+![](images/kmeans_top_10.png)
+
+#### Using Top 5 Features
+
+![](images/top5_elbow.png)
+
+**Parameter Values:** K clusters = 6
+
+| Cluster Number | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
+|---|---|---|---|
+| 0 | 8 | 495 | 1.6% |
+| 1 | 46 | 1129 | 4% |
+| 2 | 1| 11 | 8% |
+| 3 | 3820 | 1082 | 78% |
+| 4 | 153 | 1142 | 2.5% |
+| 5 | 1 | 6 | 14% |
+
+![](images/kmeans_top_5_cluster.png)
+
+
 ## Gaussian Mixture Modeling
 ### Result
-  The team found that, using the Gaussian Mixture Model, that 2 clusters was the ideal way to classify potential exoplanets with our chosen features. See below for a GIF of the first two PCA columns being assigned to various clusters for a brief understanding of how our algorithm works:
+  The team found that, using the Gaussian Mixture Model, that 2 clusters was the ideal way to classify potential exoplanets with our chosen features. See below for two GIFs (5/10 feature clustering) of the first two PCA columns being assigned to various clusters for a brief understanding of how our algorithm works:
 
 ![](images/gmm.gif)
 
@@ -95,6 +136,70 @@ As the above figure highlights, 2 clusters is approximately when the AIC/BIC beg
 
 ## Hierarchical Clustering
 ### Result
+Below is the constructed dendrogram on our scaled dataset using a ward linkage for both our top five most important features and top 10 most important features. Using top five features:
+
+![](images/dendrogram_five.png)
+
+Now, using top 10 features:
+
+![](images/dendrogram_ten.png)
+
+As mentioned briefly in the methods section, we decided to determine the optimal number of clusters by calculating the silhouette score for clustering from six to 25 clusters. Here is a graphical representation of those scores for each of our clusters. First for the five-feature dataset:
+
+![](images/silhouette_scores_five.png)
+
+And the 10-feature dataset:
+
+![](images/silhouette_scores_ten.png)
+
+By locating the maximum silhouette score for each dataset, we determine that our optimal number of clusters is 17 for our top five features with a silhouette score of 0.937 and 11 for our top 10 features with a silhouette score of 0.309. We can then move to reducing our datasets to two principal components using PCA so that we can graphically represent our clustering. Below is the result of our PCA analysis. First is the graph for our top five dataset:
+
+![](images/hier_PCA_five.png)
+
+And top 10:
+
+![](images/hier_PCA_ten.png)
+
+Lastly, we can directly calculate the number of candidate and false positive exoplanets in each of our clusters. Below is the tabular representation of this breakup for the top five features:
+
+| Cluster Number | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
+|---|---|---|---|
+| 0 | 41 | 1342 | 0.03% |
+| 1 | 0 | 596 | 0% |
+| 2 | 0 | 49 | 0% |
+| 3 | 0 | 458 | 0% |
+| 4 | 3987 | 0 | 100% |
+| 5 | 0 | 162 | 0% |
+| 6 | 1 | 17 | 0.056% |
+| 7 | 0 | 105 | 0% |
+| 8 | 0 | 313 | 0% |
+| 9 | 0 | 5 | 0% |
+| 10 | 0 | 312 | 0% |
+| 11 | 0 | 366 | 0% |
+| 12 | 0 | 113 | 0% |
+| 13 | 0 | 53 | 0% |
+| 14 | 0 | 72 | 0% |
+| 15 | 0 | 1 | 0% |
+| 16 | 0 | 1 | 0% |
+
+For the top 10 features dataset:
+
+| Cluster Number | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
+|---|---|---|---|
+| 0 | 24 | 1735 | 0.014% |
+| 1 | 56 | 924 | 0.057% |
+| 2 | 3910 | 480 | 0.891% |
+| 3 | 10 | 113 | 0.081% |
+| 4 | 0 | 170 | 0% |
+| 5 | 0 | 1 | 0% |
+| 6 | 24 | 218 | 0.099% |
+| 7 | 1 | 1 | 0.5% |
+| 8 | 0 | 4 | 0% |
+| 9 | 1 | 13 | 0.071% |
+| 10 | 3 | 306 | 0.010% |
+
+For both datasets, we have a cluster that returns a majority of candidate exoplanets. Regarding the top five dataset, cluster four contains 3987 candidate planets and no false positives, while the top 10 dataset's cluster two contains 3910 candidate planents and only 480 false positives. 
+
 ## DBSCAN
 ### Result
 #### Using Top 10 Features
