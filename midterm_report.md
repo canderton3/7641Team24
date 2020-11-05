@@ -68,6 +68,7 @@ In order to evaluate quality of a model’s fit the team used two techniques. Th
 ### Density-Based Spatial Clustering of Applications with Noise (DBSCAN)
 Density-Based Spatial Clustering of Applications with Noise (DBSCAN) is a non-parametric, density-based clustering algorithm. DBSCAN detects arbitrarily shaped clusters in the data, where a cluster is defined as a maximal set of density-connected points. A point is described as being a part of a cluster if it is within a core point's &epsilon;-neighborhood, which means the data point is within the distance &epsilon; from the core point. In order to be called a cluster instead of outliers, each cluster must contain at least a minimum number of samples. The two parameters we tuned to create our ideal DBSCAN model were \epsilon and the minimum number of samples for a group of points to be defined as a cluster.
 
+We implemented DBSCAN using python's scikit-learn (sklearn) library, which has a built-in DBSCAN function in its cluster package. We scaled all of the non-binary data with the sklearn StandardScaler function before passing the features into the DBSCAN model. Because clustering algorithms are unsupervised, we did not feed the labels into the model. The most significant contribution we made in the creation of the DBSCAN model was parameter tuning, modifying both the acceptable &epsilon; distance and the minimum number of data points in each cluster. Then, we determined the distribution of CANDIDATE exoplanets to FALSE POSITIVES in each cluster, which we have the luxury of doing since we have labeled data. Further discussion of the results are below.
 
 ## Supervised
 ### TODO: Steps Moving Forward
@@ -98,7 +99,8 @@ As the above figure highlights, 2 clusters is approximately when the AIC/BIC beg
 ### Result
 #### Using Top 10 Features
 **Parameter Values:** &epsilon; = 1, min_samples = 15
-| Cluster Number | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
+**Silhouette Coefficient:** = 0.250
+| Cluster | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
 |---|---|---|---|
 | 0 | 3967 | 0 | 100% |
 | 1 | 39 | 1213 | 0.03% |
@@ -116,8 +118,8 @@ As the above figure highlights, 2 clusters is approximately when the AIC/BIC beg
 ![](images/dbscan_clusters_top10.png)
 #### Using Top 5 Features
 **Parameter Values:** &epsilon; = 0.5, min_samples = 6
-
-| Cluster Number | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
+**Silhouette Coefficient:** = 0.928
+| Cluster | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
 |---|---|---|---|
 | 0 | 3986 | 0 | 100% |
 | 1 | 41 | 1377 | 0.03% |
