@@ -174,16 +174,6 @@ It is observed that with more features, less centroids are necessary. However, t
 		<td> 2.5% </td>
 	</tr>
 	<tr>
-		<td>Cluster Number</td>
-		<td>Number of CANDIDATES</td>
-		<td>Number of FALSE POSITIVES </td>
-		<td>Percent CANDIDATE Objects in Cluster</td>
-		<td>Cluster Number</td>
-		<td>Number of CANDIDATES</td>
-		<td>Number of FALSE POSITIVES </td>
-		<td>Percent CANDIDATE Objects in Cluster</td>
-	</tr>
-	<tr>
 		<td>0</td>
 		<td>0</td>
 		<td>1</td>
@@ -223,6 +213,160 @@ It is observed that with more features, less centroids are necessary. However, t
 		<td colspan="4"><img src="images/siltop5plot.png"></td>
 	</tr>
 	<tr>
+		<td>Cluster Number</td>
+		<td>Number of CANDIDATES</td>
+		<td>Number of FALSE POSITIVES </td>
+		<td>Percent CANDIDATE Objects in Cluster</td>
+		<td>Cluster Number</td>
+		<td>Number of CANDIDATES</td>
+		<td>Number of FALSE POSITIVES </td>
+		<td>Percent CANDIDATE Objects in Cluster</td>
+	</tr>
+	<tr>
+		<td>0</td>
+		<td>0</td>
+		<td>1</td>
+		<td>0%</td>
+		<td>0</td>
+		<td>42</td>
+		<td>2094</td>
+		<td>2%</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>0</td>
+		<td>314</td>
+		<td>0%</td>
+		<td>1</td>
+		<td>3987</td>
+		<td>1871</td>
+		<td>68%</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>0</td>
+		<td>1</td>
+		<td>0%</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td>3987</td>
+		<td>0</td>
+		<td>100%</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>4</td>
+		<td>0</td>
+		<td>115</td>
+		<td>0%</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>5</td>
+		<td>0</td>
+		<td>73</td>
+		<td>0%</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>6</td>
+		<td>0</td>
+		<td>5</td>
+		<td>0%</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>7</td>
+		<td>0</td>
+		<td>158</td>
+		<td>0%</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>8</td>
+		<td>41</td>
+		<td>1360</td>
+		<td>3%</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>9</td>
+		<td>0</td>
+		<td>602</td>
+		<td>0%</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>10</td>
+		<td>0</td>
+		<td>159</td>
+		<td>0%</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>11</td>
+		<td>1</td>
+		<td>31</td>
+		<td>3%</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>12</td>
+		<td>0</td>
+		<td>458</td>
+		<td>0%</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>13</td>
+		<td>0</td>
+		<td>321</td>
+		<td>0%</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>14</td>
+		<td>0</td>
+		<td>367</td>
+		<td>0%</td>
 		<td></td>
 		<td></td>
 		<td></td>
