@@ -136,7 +136,7 @@ However, we used the AIC/BIC criterion to determine the best number of clusters 
 
 As the above figure highlights, 2 clusters is approximately when the AIC/BIC begins indicating 2 clusters is ideal for the 10 feature model and 3 is appropriate for the 5 feature model. Below is the figure displaying the model with just two clusters. :
 
-![](images/5_feature_final.png
+![](images/5_feature_final.png)
 
 ![](images/10_feature_final.png)
 
