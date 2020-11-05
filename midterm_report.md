@@ -93,11 +93,8 @@ In order to choose the correct number of clusters for the K-means algorithim, th
 |---|---|
 |![](images/top10_elbow.png)| ![](images/top5_elbow.png)|
 | Cluster Number | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
-|---|---|---|---|
-| 0 | 42 | 1765 | 2% |
-| 1 | 0 | 1213 | 0% |
-| 2 | 0 | 1| 0% |
-| 3 | 3987 | 1350 | 75% |
+| Infliction Point for Top 10 |Infliction Point for Top 5|
+| K clusters = 4  | K clusters = 6 |
 
 
 
