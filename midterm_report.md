@@ -101,17 +101,21 @@ In order to choose the correct number of clusters for the K-means algorithim, th
 	</tr>
 	<tr>
 		<td colspan="4"><img src="images/top10_elbow.png"></td>
-		<td colspan="2"><img src="images/top5_elbow.png"></td>
+		<td colspan="4"><img src="images/top5_elbow.png"></td>
 	</tr>
 	<tr>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
+		<th colspan="4">Top 10 Cluster Analysis</th>
+		<th colspan="4">Top 5 Cluster Analysis</th>
+	</tr>
+	<tr>
+		<td>Cluster Number</td>
+		<td>Number of CANDIDATES</td>
+		<td>Number of FALSE POSITIVES </td>
+		<td>Percent CANDIDATE Objects in Cluster</td>
+		<td>Cluster Number</td>
+		<td>Number of CANDIDATES</td>
+		<td>Number of FALSE POSITIVES </td>
+		<td>Percent CANDIDATE Objects in Cluster</td>
 	</tr>
 </table>
 
