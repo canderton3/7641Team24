@@ -209,8 +209,8 @@ It is observed that with more features, less centroids are necessary. However, t
 		<td colspan="4"><img src="images/siltop5.png"></td>
 	</tr>
 	<tr>
-		<td colspan="4"><img src="images/siltop10plot.png"></td>
-		<td colspan="4"><img src="images/siltop5plot.png"></td>
+		<td colspan="4"><img src="images/silpoltyop10.png"></td>
+		<td colspan="4"><img src="images/silplottop5.png"></td>
 	</tr>
 	<tr>
 		<td>Cluster Number</td>
