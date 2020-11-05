@@ -96,7 +96,7 @@ In order to choose the correct number of clusters for the K-means algorithim, th
 
 By evaluating the value of K with sum squared error, it is observed that less centroids are necessary with more features. The infliction point is more clear when using more features. With only 5 features, the infliction point requires 2 more centroids than with 10 features. With the K values defined, we then utilized them in our algorithim. 
 
-In terms of correctly classifying exoplanet candidates by clusters that have candidates verses clusters that don't, both models performance struggle to siphon off candidates. There are some clusters that are found to have no exoplanets which is helpful. This could be that K-means is able to identify patterns in the top 10 and top 5 features that can be used downstream in our supervised learning models.
+In terms of correctly classifying exoplanet candidates by clusters that have candidates verses clusters that don't, both model's perform was simillarly. There are some clusters that are found to have no exoplanets which is helpful and one main cluster that has a 75-78% accuracy classifying candidates as exoplantets. It could be that K-means is able to identify patterns in the top 10 and top 5 features that can be used downstream in our supervised learning models. 
 
 <table>
 	<tr>
@@ -189,6 +189,9 @@ In terms of correctly classifying exoplanet candidates by clusters that have can
 
 **Parameter Values:** Tuning K with Sillhouette Coefficient
 
+The team further evaluated the value of K through silhoutte coefficients. For the top 5 features, the silhouette coefficient value decreased as the number of clusters increased. The opposite is the case for top 10 features. Based on this information, we selected K=2 for the top 5 features and K=15 for the top 10 features.
+
+The model performed worse for where K = 2 but performed near perfectly where K=15 for the top 10 features. This could mean that the kmeans model will be prone to over-fitting or underfitting when using the silhouette coefficient to determine the number of clusters.
 
 <table>
 	<tr>
@@ -202,6 +205,10 @@ In terms of correctly classifying exoplanet candidates by clusters that have can
 	<tr>
 		<td colspan="4"><img src="images/silpoltyop10.png"></td>
 		<td colspan="4"><img src="images/silplottop5.png"></td>
+	</tr>
+	<tr>
+		<td colspan="4">Silhoute Coefficent 0.93 where K = 15 clusters</td>
+		<td colspan="4">Silhoute Coefficent 0.63 where K = 2</td>
 	</tr>
 	<tr>
 		<td>Cluster Number</td>
