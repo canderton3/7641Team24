@@ -92,7 +92,7 @@ In order to choose the correct number of clusters for the K-means algorithim, th
 |Using Top 10 Features| Using Top 5 Features|
 |---|---|
 |![](images/top10_elbow.png)| ![](images/top5_elbow.png)|
-| Infliction Point for Top 10: 4 centroids |Infliction Point for Top 5: 6 centroids|
+| **Infliction Point for Top 10: 4 centroids** | **Infliction Point for Top 5: 6 centroids**|
 
 
 
