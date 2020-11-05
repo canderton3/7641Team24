@@ -112,16 +112,16 @@ It is observed that with more features, less centroids are necessary. However, t
 
 <table>
 	<tr>
-		<th>Using Top 10 Features</th>
-		<th> Using Top 5 Features</th>
+		<th colspan="4">Using Top 10 Features</th>
+		<th colspan="4"> Using Top 5 Features</th>
 	</tr>
 	<tr>
-		<td><img src="images/top10_elbow.png"></td>
-		<td><img src="images/top5_elbow.png"></td>
+		<td colspan="4"><img src="images/top10_elbow.png"></td>
+		<td colspan="4"><img src="images/top5_elbow.png"></td>
 	</tr>
 	<tr>
-		<td>Infliction Point for Top 10: 4 clusters</td>
-		<td>Infliction Point for Top 5: 6 clusters</td>
+		<td colspan="4">Infliction Point for Top 10: 4 clusters</td>
+		<td colspan="4">Infliction Point for Top 5: 6 clusters</td>
 	</tr>
 	<tr>
 		<td colspan="4"><img src="images/kmeans_top_10.png"></td>
