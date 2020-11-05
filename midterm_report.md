@@ -174,14 +174,35 @@ It is observed that with more features, less centroids are necessary. However, t
 		<td> 2.5% </td>
 	</tr>
 	<tr>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td> 5 </td>
-		<td> 1 </td>
-		<td> 6 </td>
-		<td> 14% </td>
+		<td>Cluster Number</td>
+		<td>Number of CANDIDATES</td>
+		<td>Number of FALSE POSITIVES </td>
+		<td>Percent CANDIDATE Objects in Cluster</td>
+		<td>Cluster Number</td>
+		<td>Number of CANDIDATES</td>
+		<td>Number of FALSE POSITIVES </td>
+		<td>Percent CANDIDATE Objects in Cluster</td>
+	</tr>
+	<tr>
+		<td>0</td>
+		<td>0</td>
+		<td>1</td>
+		<td>0%</td>
+		<td>0</td>
+		<td>14</td>
+		<td>610</td>
+		<td>2%</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>0</td>
+		<td>314</td>
+		<td>0%</td>
+		<td>1</td>
+		<td>4015</td>
+		<td>3355</td>
+		<td>54%</td>
+
 	</tr>
 </table>
 
@@ -194,16 +215,18 @@ It is observed that with more features, less centroids are necessary. However, t
 		<th colspan="4"> Using Top 5 Features</th>
 	</tr>
 	<tr>
-		<td colspan="4"><img src="images/top10_elbow.png"></td>
-		<td colspan="4"><img src="images/top5_elbow.png"></td>
+		<td colspan="4"><img src="images/siltop10.png"></td>
+		<td colspan="4"><img src="images/siltop5.png"></td>
 	</tr>
 	<tr>
-		<td colspan="4">Infliction Point for Top 10: 4 clusters</td>
-		<td colspan="4">Infliction Point for Top 5: 6 clusters</td>
+		<td colspan="4"><img src="images/siltop10plot.png"></td>
+		<td colspan="4"><img src="images/siltop5plot.png"></td>
 	</tr>
 	<tr>
-		<td>Silhouette Scores: [0.5312860014581172, 0.5306977237020124, 0.6017344367945069, 0.7044771067717052, 0.7595917452118, 0.7685866920011898, 0.8016581798021736, 0.8062319048175226, 0.832988942520863, 0.8949064333793076, 0.9000650176392454, 0.9036719311910983, 0.903697463001484, 0.925826379509238]</td>
-		<td>Silhouette Scores: [0.6333416941945377, 0.41343399035839595, 0.3799644959387882, 0.38413549957093934, 0.3481638401842484, 0.35379785881633924, 0.3537538177071062, 0.22680717318968258, 0.23487392189767123, 0.24313456829646443, 0.24672386780873956, 0.25516020957620233, 0.2516264168043511, 0.2691604567720151] </td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
 	</tr>
 </table>
 
