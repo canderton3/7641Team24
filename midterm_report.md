@@ -98,7 +98,6 @@ In order to choose the correct number of clusters for the K-means algorithim, th
     <thead>
         <tr>
             <th>Layer 1</th>
-            <th>Layer 2</th>
             <th>Layer 3</th>
         </tr>
     </thead>
