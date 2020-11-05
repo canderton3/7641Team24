@@ -22,6 +22,7 @@ def load_data():
     return top_10, top_5, labels
 
 def dbscan(X, y):
+    X_df = X
     binary_vars = X[:, :4]
     print(binary_vars)
     # Scale non-binary variables
@@ -31,8 +32,8 @@ def dbscan(X, y):
 
     flag = True
     sils = []
-    ep = 1
-    min_samples = 15
+    ep = 0.5
+    min_samples = 6
     # Compute DBSCAN
     db = DBSCAN(eps=ep, min_samples=min_samples).fit(X)
     labels = db.labels_
@@ -46,7 +47,10 @@ def dbscan(X, y):
         frequencies = np.asarray((unique, counts)).T
         print("CLUSTER ", i)
         print(frequencies)
-    plot_dbscan(X=X, y=y, dbscan_labels=labels)
+    # Assess first cluster data
+    cluster_0 = X_df[np.where(labels == 1)]
+    assess_candidate_points(cluster_0)
+    #plot_dbscan(X=X, y=y, dbscan_labels=labels)
 
 
 def plot_dbscan(X, y, dbscan_labels):
@@ -73,8 +77,32 @@ def plot_dbscan(X, y, dbscan_labels):
     ax.set_ylabel("PCA Component 1")
     plt.show()
 
+def assess_candidate_points(cluster_0):
+    print(cluster_0)
+    df = pd.DataFrame(data=cluster_0, columns=["koi_fpflag_co","koi_fpflag_nt","koi_fpflag_ss","koi_fpflag_ec","koi_prad"])
+    # Averages
+    print("AVERAGES\n koi_fpflag_co: {}\n koi_fpflag_nt: {}\n koi_fpflag_ss: {}\n koi_fpflag_ec: {}\n koi_prad: {}".format(
+        df["koi_fpflag_co"].mean(), 
+        df["koi_fpflag_nt"].mean(), 
+        df["koi_fpflag_ss"].mean(),
+        df["koi_fpflag_ec"].mean(),
+        df["koi_prad"].mean()))
+    # Modes for Binary
+    print("MODES\n koi_fpflag_co: {}\n koi_fpflag_nt: {}\n koi_fpflag_ss: {}\n koi_fpflag_ec: {}".format(
+        df["koi_fpflag_co"].mode(), 
+        df["koi_fpflag_nt"].mode(), 
+        df["koi_fpflag_ss"].mode(),
+        df["koi_fpflag_ec"].mode()))
+
+    print("COUNT ZEROS: koi_fpflag_co: {}\n koi_fpflag_nt: {}\n koi_fpflag_ss: {}\n koi_fpflag_ec: {}".format(
+        df["koi_fpflag_co"].value_counts(), 
+        df["koi_fpflag_nt"].value_counts(), 
+        df["koi_fpflag_ss"].value_counts(),
+        df["koi_fpflag_ec"].value_counts()))
+
+
 if __name__ == "__main__":
     top_10, top_5, labels = load_data()
     print(labels)
-    dbscan(top_10, labels)
+    dbscan(top_5, labels)
 

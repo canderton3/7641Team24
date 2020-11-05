@@ -369,9 +369,17 @@ The silhouette coefficient for the 5 feature model is much higher than the 10 fe
 
 # Discussion
 ## What We've Learned About the Data
--- use dbscan as 'case study' for characteristics of data points that are predominately CANDIDATE planets
+As we've seen from our clustering results, most of the clustering algorithms converged on a solution that ended up with one cluster holding almost all of the candidate points, then a cluster holding a much smaller amount. We found this very interesting so decided to look into the makeup of the objects that were apart of those two clusters. We will use the DBSCAN model run on the 5 feature dataset as an example. For this model, clusters 0 and 1 hold all (or almost all) of the candidate points in the dataset. A table with statistics for these two clusters is below.
+
+| Cluster | Average koi_fpflag_co Value | Average koi_fpflag_nt Value | Average koi_fpflag_ss Value | Average koi_fpflag_ec Value | Average koi_prad Value |
+|---|---|---|---|---|---|
+| 0 | 0 | 0 | 0 | 0 | 3.761 |
+| 1 | 0 | 0 | 1 | 0 | 69.419 |
+
+Interestingly enough, for cluster 0, all of the binary flags were also 0. For cluster 1, koi_fpflag_ss was equal to 1. There is also a significant difference between the koi_prad values. These are important statistics to be aware of because they paint a clearer picture on how NASA actually classifies exoplanets, without us ever needing to know the specific astronomical requirements.
+
 ## Comparing Clustering Algorithms
-Most of our clustering algorithms seemed to converge on the same solution, despite the varied parameters and number of clusters.
+
 
 ## Steps Moving Forward
 Now that we have implemented the unsupervised learning section of our project (techincally twice since we implemented random forest for feature selection), we can start working on the supervised learning portion. We believe that our clustering results can help us with further classification. The current plan is to use the cluster that the data point belongs to as its label. Due to the distribution of CANDIDATE data points and FALSE POSITIVE data points in the clusters determined above, the cluster label seems to be a relevant indicator of whether a data point is a CANDIDATE or FALSE POSITIVE. We are in the process of evaluating supervised algorithms such as decision trees and logistic regression to complete our ensemble model.
