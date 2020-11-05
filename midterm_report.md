@@ -124,77 +124,66 @@ It is observed that with more features, less centroids are necessary. However, t
 		<td>Number of FALSE POSITIVES </td>
 		<td>Percent CANDIDATE Objects in Cluster</td>
 	</tr>
-<tr>
-<td> 0 </td> 
-<td> 42 </td> 
-<td> 1765 </td> 
-<td> 2% <td>
-<td> 0 </td>
-<td> 8 </td>
-<td> 495 </td>
-<td> 1.6% </td>
-
-</tr>
-<tr>
-	
-<td> 1 </td>
-<td> 0 </td>
-<td> 1213 </td>
-<td> 0% <td>
-<td> 1 </td>
-<td> 46 </td>
-<td> 1129 </td>
-<td> 4% </td>
-
-</tr>
-<tr>
-	
-<td> 2 </td>
-<td> 0 </td>
-<td> 1 </td>
-<td> 0% </td>
-<td> 2 </td>
-<td> 1 </td>
-<td> 11 </td>
-<td> 8% </td>
-
-</tr>
-<tr>
-	
-<td> 3 </td>
-<td> 3987 </td>
-<td> 1350 </td>
-<td> 75% </td>
-<td> 3 </td>
-<td> 3820 </td>
-<td> 1082 </td>
-<td> 78% </td>
-
-</tr>
-<tr>
-	
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td> 4 </td>
-<td> 153 </td>
-<td> 1142 </td>
-<td> 2.5% </td>
-
-</tr>
-<tr>
-	
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td> 5 </td>
-<td> 1 </td>
-<td> 6 </td>
-<td> 14% </td>
-
-</tr>
+	<tr>
+		<td> 0 </td> 
+		<td> 42 </td> 
+		<td> 1765 </td> 
+		<td> 2% </td>
+		<td> 0 </td>
+		<td> 8 </td>
+		<td> 495 </td>
+		<td> 1.6% </td>
+	</tr>
+	<tr>
+		<td> 1 </td>
+		<td> 0 </td>
+		<td> 1213 </td>
+		<td> 0% </td>
+		<td> 1 </td>
+		<td> 46 </td>
+		<td> 1129 </td>
+		<td> 4% </td>
+	</tr>
+	<tr>
+		<td> 2 </td>
+		<td> 0 </td>
+		<td> 1 </td>
+		<td> 0% </td>
+		<td> 2 </td>
+		<td> 1 </td>
+		<td> 11 </td>
+		<td> 8% </td>
+	</tr>
+	<tr>
+		<td> 3 </td>
+		<td> 3987 </td>
+		<td> 1350 </td>
+		<td> 75% </td>
+		<td> 3 </td>
+		<td> 3820 </td>
+		<td> 1082 </td>
+		<td> 78% </td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td> 4 </td>
+		<td> 153 </td>
+		<td> 1142 </td>
+		<td> 2.5% </td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td> 5 </td>
+		<td> 1 </td>
+		<td> 6 </td>
+		<td> 14% </td>
+	</tr>
 </table>
 
 #### Using Top 10 Features
