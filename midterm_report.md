@@ -371,6 +371,7 @@ The silhouette coefficient for the 5 feature model is much higher than the 10 fe
 ## What We've Learned About the Data
 -- use dbscan as 'case study' for characteristics of data points that are predominately CANDIDATE planets
 ## Comparing Clustering Algorithms
+Most of our clustering algorithms seemed to converge on the same solution, despite the varied parameters and number of clusters.
 
 ## Steps Moving Forward
 Now that we have implemented the unsupervised learning section of our project (techincally twice since we implemented random forest for feature selection), we can start working on the supervised learning portion. We believe that our clustering results can help us with further classification. The current plan is to use the cluster that the data point belongs to as its label. Due to the distribution of CANDIDATE data points and FALSE POSITIVE data points in the clusters determined above, the cluster label seems to be a relevant indicator of whether a data point is a CANDIDATE or FALSE POSITIVE. We are in the process of evaluating supervised algorithms such as decision trees and logistic regression to complete our ensemble model.
