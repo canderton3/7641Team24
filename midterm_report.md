@@ -88,24 +88,31 @@ For each cluster, we used the labels from the dataset to discover the distributi
 ### Result
 In order to choose the correct number of clusters for the K-means algorithim, the team plotted an elbow curve over both the top 10 and top 5 features. We then ran an elbow identifying function to find the most significant number of clusters to use.
 
+<table>
+	<tr>
+		<th>Using Top 10 Features</th>
+		<th> Using Top 5 Features</th>
+	</tr>
+	<tr>
+		<td><img src="images/top10_elbow.png"></td>
+		<td><img src="images/top5_elbow.png"></td>
+	</tr>
+	<tr>
+		<td>Infliction Point for Top 10: 4 centroids</td>
+		<td>Infliction Point for Top 5: 6 centroids</td>
+	</tr>
+</table>
 
-|Using Top 10 Features| Using Top 5 Features|
-|---|---|
-|![](images/top10_elbow.png)| ![](images/top5_elbow.png)|
-| **Infliction Point for Top 10: 4 centroids** | **Infliction Point for Top 5: 6 centroids**|
+It is observed that with more features, less centroids are necessary. However, the infliction point is more clear. With only 5 features, the infliction point requires 2 more centroids than with 10. With the K values defined, we then utilized them in our algorithim.
 
 <table>
 	<tr>
-		<th colspan="4">Using Top 10 Features</th>
-		<th colspan="4"> Using Top 5 Features</th>
+		<th colspan="4">Top 10 Features: K = 4</th>
+		<th colspan="4">Top 5 Features: K = 6</th>
 	</tr>
 	<tr>
-		<td colspan="4"><img src="images/top10_elbow.png"></td>
-		<td colspan="4"><img src="images/top5_elbow.png"></td>
-	</tr>
-	<tr>
-		<th colspan="4">Top 10 Cluster Analysis</th>
-		<th colspan="4">Top 5 Cluster Analysis</th>
+		<td colspan="4">img src="images/kmeans_top_10.pngg"></td>
+		<td colspan="4">images/kmeans_top_5.png</td> 
 	</tr>
 	<tr>
 		<td>Cluster Number</td>
@@ -116,6 +123,8 @@ In order to choose the correct number of clusters for the K-means algorithim, th
 		<td>Number of CANDIDATES</td>
 		<td>Number of FALSE POSITIVES </td>
 		<td>Percent CANDIDATE Objects in Cluster</td>
+	</tr>
+	<tr>
 	</tr>
 </table>
 
