@@ -88,6 +88,7 @@ For each cluster, we used the labels from the dataset to discover the distributi
 ### Result
 In order to choose the correct number of clusters for the K-means algorithim, the team plotted an elbow curve over both the top 10 and top 5 features. We then ran an elbow identifying function to find the most significant number of clusters to use.
 
+**Parameter Values:** 
 <table>
 	<tr>
 		<th>Using Top 10 Features</th>
@@ -98,9 +99,11 @@ In order to choose the correct number of clusters for the K-means algorithim, th
 		<td><img src="images/top5_elbow.png"></td>
 	</tr>
 	<tr>
-		<td>Infliction Point for Top 10: 4 centroids</td>
-		<td>Infliction Point for Top 5: 6 centroids</td>
+		<td>Infliction Point for Top 10: 4 clusters</td>
+		<td>Infliction Point for Top 5: 6 clusters/td>
 	</tr>
+		<td>Silhouette Scores: [0.5312860014581172, 0.5306977237020124, 0.6017344367945069, 0.7044771067717052, 0.7595917452118, 0.7685866920011898, 0.8016581798021736, 0.8062319048175226, 0.832988942520863, 0.8949064333793076, 0.9000650176392454, 0.9036719311910983, 0.903697463001484, 0.925826379509238]</td>
+		<td>Silhouette Scores: [0.6333416941945377, 0.41343399035839595, 0.3799644959387882, 0.38413549957093934, 0.3481638401842484, 0.35379785881633924, 0.3537538177071062, 0.22680717318968258, 0.23487392189767123, 0.24313456829646443, 0.24672386780873956, 0.25516020957620233, 0.2516264168043511, 0.2691604567720151] </td>
 </table>
 
 It is observed that with more features, less centroids are necessary. However, the infliction point is more clear. With only 5 features, the infliction point requires 2 more centroids than with 10. With the K values defined, we then utilized them in our algorithim.
