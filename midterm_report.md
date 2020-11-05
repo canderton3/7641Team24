@@ -128,13 +128,17 @@ In order to choose the correct number of clusters for the K-means algorithim, th
 ![](images/10_feature_gmm.gif)
 
 
-However, we used the AIC/BIC criterion to determine the best number of clusters to use. Below is a graph comparing number of clusters to criterion number, with the “elbow/best #” highlighted:
+However, we used the AIC/BIC criterion to determine the best number of clusters to use. Below is a graph comparing number of clusters to criterion number, with the “elbow/best #” highlighted. Both 5 and 10 features are displayed for reference:
 
-![](images/aic_bic_gmm.png)
+![](images/aic_bic_5.png)
 
-As the above figure highlights, 2 clusters is approximately when the AIC/BIC begins indicating 2 clusters is ideal for this model. Below is the figure displaying the model with just two clusters:
+![](images/aic_bic_10.png)
 
-![](images/gmm_2_cluster.png)
+As the above figure highlights, 2 clusters is approximately when the AIC/BIC begins indicating 2 clusters is ideal for the 10 feature model and 3 is appropriate for the 5 feature model. Below is the figure displaying the model with just two clusters. :
+
+![](images/5_feature_final.png
+
+![](images/10_feature_final.png)
 
 ## Hierarchical Clustering
 ### Result
