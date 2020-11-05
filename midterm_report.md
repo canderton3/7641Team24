@@ -213,6 +213,7 @@ For both datasets, we have a cluster that returns a majority of candidate exopla
 Results are presented for both the Top 10 features dataset and the Top 5 features dataset. Even though the tuned parameters were different, the results were strikingly similar.
 #### Using Top 10 Features
 **Parameter Values:** &epsilon; = 1, min_samples = 15
+
 **Silhouette Coefficient:** = 0.250
 
 As seen in the other clustering algorithms, DBSCAN settled on a solution where the majority of the CANDIDATE planets are located in one cluster, with a sprinkle in another cluster, where they only make up 0.03% of the cluster data. This phenomenon will be further explained in the Discussion section. Only 7,621 data points are accounted for in this cluster spread, a difference of over 300 from the 7,995 data points passed in. This is mostly likely due to the fact that outliers found by DBSCAN will not be linked to a cluster. If sections of points do not meet the minimum sample requirement to be designated as a cluster, or are too far from other data points to be within &epsilon; distance of others, the data point will be an outlier and not counted in a cluster.
@@ -240,6 +241,7 @@ The silhouette coefficient for the 10 feature dataset is relatively low - 0.250.
 
 #### Using Top 5 Features
 **Parameter Values:** &epsilon; = 0.5, min_samples = 6
+
 **Silhouette Coefficient:** = 0.928
 
 The distribution of CANDIDATE objects in each cluster is extremely similar to the 10 feature dataset, even comparing the percentages of CANDIDATE Objects in the clusters. However, the 5 feature model accounts for almost all of the data points passed in, with a total of 7,962 data points. This leaves this model with only about 30 outliers, a mere 10% of the outliers detected in the 10 feature model.
@@ -265,9 +267,10 @@ The plot visualizing the clusters and their distribution is below. It looks rema
 The silhouette coefficient for the 5 feature model is much higher than the 10 feature model, which we hypothesize is attributed to the lower amount of outliers, and more even distribution of FALSE POSITIVE objects.
 
 # Discussion
-## Comparing Clustering Algorithms
-### What We've Learned About the Data
+## What We've Learned About the Data
 -- use dbscan as 'case study' for characteristics of data points that are predominately CANDIDATE planets
+## Comparing Clustering Algorithms
+
 ## Steps Moving Forward
 Now that we have implemented the unsupervised learning section of our project (techincally twice since we implemented random forest for feature selection), we can start working on the supervised learning portion. We believe that our clustering results can help us with further classification. The current plan is to use the cluster that the data point belongs to as its label. Due to the distribution of CANDIDATE data points and FALSE POSITIVE data points in the clusters determined above, the cluster label seems to be a relevant indicator of whether a data point is a CANDIDATE or FALSE POSITIVE. We are in the process of evaluating supervised algorithms such as decision trees and logistic regression to complete our ensemble model.
 
