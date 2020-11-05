@@ -95,21 +95,16 @@ In order to choose the correct number of clusters for the K-means algorithim, th
 | **Infliction Point for Top 10: 4 centroids** | **Infliction Point for Top 5: 6 centroids**|
 
 <table>
-         <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-         </tr>
-         <tr>
-            <td colspan="2"></td>
-            <td></td>
-         </tr>
-         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-         </tr>
-      </table>
+ <tr>
+    <th colspan="4">Using Top 10 Features</th>
+    <th colspan="4"> Using Top 5 Features</th>
+ </tr>
+ <tr>
+    <td colspan="4">![](images/top10_elbow.png)</td>
+    <td colspan="2"> ![](images/top5_elbow.png) </td>
+ </tr>
+
+</table>
 
 #### Using Top 10 Features
 
