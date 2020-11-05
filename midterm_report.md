@@ -121,7 +121,7 @@ In order to choose the correct number of clusters for the K-means algorithim, th
 
 ## Gaussian Mixture Modeling
 ### Result
-  The team found that, using the Gaussian Mixture Model, that 2 clusters was the ideal way to classify potential exoplanets with our chosen features. See below for a GIF of the first two PCA columns being assigned to various clusters for a brief understanding of how our algorithm works:
+  The team found that, using the Gaussian Mixture Model, that 2 clusters was the ideal way to classify potential exoplanets with our chosen features. See below for two GIFs (5/10 feature clustering) of the first two PCA columns being assigned to various clusters for a brief understanding of how our algorithm works:
 
 ![](images/gmm.gif)
 
