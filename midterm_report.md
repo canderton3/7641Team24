@@ -79,7 +79,10 @@ A silhouette score measures how close points are to their own clusters but far f
 ### Density-Based Spatial Clustering of Applications with Noise (DBSCAN)
 Density-Based Spatial Clustering of Applications with Noise (DBSCAN) is a non-parametric, density-based clustering algorithm. DBSCAN detects arbitrarily shaped clusters in the data, where a cluster is defined as a maximal set of density-connected points. A point is described as being a part of a cluster if it is within a core point's &epsilon;-neighborhood, which means the data point is within the distance &epsilon; from the core point. In order to be called a cluster instead of outliers, each cluster must contain at least a minimum number of samples. The two parameters we tuned to create our ideal DBSCAN model were \epsilon and the minimum number of samples for a group of points to be defined as a cluster.
 
+<<<<<<< HEAD
 We implemented DBSCAN using Python's scikit-learn (sklearn) library, which has a built-in DBSCAN function in its cluster package. We scaled all of the non-binary data with the sklearn StandardScaler function before passing the features into the DBSCAN model. Because clustering algorithms are unsupervised, we did not feed the labels into the model. The most significant contribution we made in the creation of the DBSCAN model was parameter tuning, modifying both the acceptable &epsilon; distance and the minimum number of data points in each cluster. Then, we determined the distribution of CANDIDATE exoplanets to FALSE POSITIVES in each cluster, which we have the luxury of doing since we have labeled data. Further discussion of the results are below.
+=======
+>>>>>>> d5736d2b092af88fa241df1a862d829441936736
 
 # Results
 For each cluster, we used the labels from the dataset to discover the distribution of CANDIDATE and FALSE POSITIVE objects in each cluster. We calculate the percent of CANDIDATE objects in the cluster by dividing the number of CANDIDATES by the total number of objects in the cluster. To plot the clusters, we unfortunately cannot effectively visualize up to 10 dimensions; because of this issue, we chose to plot the first two principal components. We used principal component analysis (PCA) to determine the top two features that describe most of the variance in the model. In the plots, different colors denote different clusters, and star shapes denote CANDIDATE objects. We did attempt to use 3D plots to more effectively visualize the clusters but found that it was not exceedingly useful information.
@@ -125,15 +128,22 @@ In order to choose the correct number of clusters for the K-means algorithim, th
 ### Result
   The team found that, using the Gaussian Mixture Model, that 2 clusters was the ideal way to classify potential exoplanets with our chosen features. See below for two GIFs (5/10 feature clustering) of the first two PCA columns being assigned to various clusters for a brief understanding of how our algorithm works:
 
-![](images/gmm.gif)
+![](images/5_feature_gmm.gif)
 
-However, we used the AIC/BIC criterion to determine the best number of clusters to use. Below is a graph comparing number of clusters to criterion number, with the “elbow/best #” highlighted:
+![](images/10_feature_gmm.gif)
 
-![](images/aic_bic_gmm.png)
 
-As the above figure highlights, 2 clusters is approximately when the AIC/BIC begins indicating 2 clusters is ideal for this model. Below is the figure displaying the model with just two clusters:
+However, we used the AIC/BIC criterion to determine the best number of clusters to use. Below is a graph comparing number of clusters to criterion number, with the “elbow/best #” highlighted. Both 5 and 10 features are displayed for reference:
 
-![](images/gmm_2_cluster.png)
+![](images/aic_bic_5.png)
+
+![](images/aic_bic_10.png)
+
+As the above figure highlights, 2 clusters is approximately when the AIC/BIC begins indicating 2 clusters is ideal for the 10 feature model and 3 is appropriate for the 5 feature model. Below is the figure displaying the model with just two clusters. :
+
+![](images/5_feature_final.png)
+
+![](images/10_feature_final.png)
 
 ## Hierarchical Clustering
 ### Result
@@ -206,11 +216,15 @@ For both datasets, we have a cluster that returns a majority of candidate exopla
 Results are presented for both the Top 10 features dataset and the Top 5 features dataset. Even though the tuned parameters were different, the results were strikingly similar.
 #### Using Top 10 Features
 **Parameter Values:** &epsilon; = 1, min_samples = 15
+<<<<<<< HEAD
 **Silhouette Coefficient:** = 0.250
 
 As seen in the other clustering algorithms, DBSCAN settled on a solution where the majority of the CANDIDATE planets are located in one cluster, with a sprinkle in another cluster, where they only make up 0.03% of the cluster data. This phenomenon will be further explained in the Discussion section. Only 7,621 data points are accounted for in this cluster spread, a difference of over 300 from the 7,995 data points passed in. This is mostly likely due to the fact that outliers found by DBSCAN will not be linked to a cluster. If sections of points do not meet the minimum sample requirement to be designated as a cluster, or are too far from other data points to be within &epsilon; distance of others, the data point will be an outlier and not counted in a cluster.
 
 | Cluster | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
+=======
+| Cluster Number | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
+>>>>>>> d5736d2b092af88fa241df1a862d829441936736
 |---|---|---|---|
 | 0 | 3967 | 0 | 100% |
 | 1 | 39 | 1213 | 0.03% |
