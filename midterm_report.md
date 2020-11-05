@@ -88,6 +88,10 @@ For each cluster, we used the labels from the dataset to discover the distributi
 ### Result
 In order to choose the correct number of clusters for the K-means algorithim, the team plotted an elbow curve over both the top 10 and top 5 features. We then ran an elbow identifying function to find the most significant number of clusters to use.
 
+#### Using Top 10 Features            |  Using Top 5 Features
+:-------------------------:|:-------------------------:
+![](images/top10_elbow.png) |  ![](images/top5_elbow.png)
+
 #### Using Top 10 Features
 
 ![](images/top10_elbow.png)
