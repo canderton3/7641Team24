@@ -171,28 +171,17 @@ It is observed that with more features, less centroids are necessary. However, t
 		<td> 4 </td>
 		<td> 153 </td>
 		<td> 1142 </td>
-		<td> 2.5% </td>
+		<td> 12% </td>
 	</tr>
 	<tr>
-		<td>0</td>
-		<td>0</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>5</td>
 		<td>1</td>
-		<td>0%</td>
-		<td>0</td>
-		<td>14</td>
-		<td>610</td>
-		<td>2%</td>
-	</tr>
-	<tr>
-		<td>1</td>
-		<td>0</td>
-		<td>314</td>
-		<td>0%</td>
-		<td>1</td>
-		<td>4015</td>
-		<td>3355</td>
-		<td>54%</td>
-
+		<td>6</td>
+		<td>14%</td>
 	</tr>
 </table>
 
