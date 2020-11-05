@@ -183,6 +183,12 @@ It is observed that with more features, less centroids are necessary. However, t
 		<td> 6 </td>
 		<td> 14% </td>
 	</tr>
+	<tr>
+		<td colspan="2"> Candidate Label Clustering Accuarcy </td>
+		<td colspan="2"> 48% </td> 
+		<td colspan="2"> Candidate Label Clustering Accuarcy </td>
+		<td colspan="2">  </td> 
+	</tr>
 </table>
 
 **Parameter Values:** Tuning K with Sillhouette Coefficient
