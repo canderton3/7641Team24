@@ -111,8 +111,8 @@ It is observed that with more features, less centroids are necessary. However, t
 		<th colspan="4">Top 5 Features: K = 6</th>
 	</tr>
 	<tr>
-		<td colspan="4">img src="images/kmeans_top_10.pngg"></td>
-		<td colspan="4">images/kmeans_top_5.png</td> 
+		<td colspan="4"><img src="images/kmeans_top_10.png"></td>
+		<td colspan="4"><img src="images/kmeans_top_5.png"></td> 
 	</tr>
 	<tr>
 		<td>Cluster Number</td>
