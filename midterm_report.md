@@ -1,3 +1,6 @@
+# Exoplanet Classification
+## Chase Anderton, Darby Cobb, Micaela Siraj, Sam Weber
+
 # Introduction/Background
 NASA built and launched the Kepler Space Observatory satellite in 2009. The primary objective of the telescope was to find other planets outside of our solar system, known as exoplanets; to do this, Kepler collects data on "objects of interest" that could be classified as exoplanets based on certain characteristics. Despite some mechanical failures, Kepler is still active and continues to gather data on possible planets outside of our solar system. By discovering new exoplanets in our galaxy, we can continue humanity's search for life on other planets and possible habitable zones.
 
