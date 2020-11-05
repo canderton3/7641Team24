@@ -100,8 +100,8 @@ In order to choose the correct number of clusters for the K-means algorithim, th
     <th colspan="4"> Using Top 5 Features</th>
  </tr>
  <tr>
-    <td colspan="4">![](images/top10_elbow.png)</td>
-    <td colspan="2"> ![](images/top5_elbow.png) </td>
+    <td colspan="4"><img src="images/top10_elbow.png"></td>
+    <td colspan="2"><img src="images/top5_elbow.png"></td>
  </tr>
 
 </table>
