@@ -94,7 +94,9 @@ In order to choose the correct number of clusters for the K-means algorithim, th
 **Parameter Values:** Tuning K with Sum Squared Error Elbow Curve
 
 
-It is observed that with more features, less centroids are necessary. However, the infliction point is more clear. With only 5 features, the infliction point requires 2 more centroids than with 10. With the K values defined, we then utilized them in our algorithim. In terms of correctly classifying exoplanet candidates by clusters that have candidates verses clusters that don't, both models performance struggle to siphon off candidates. There are some clusters that are found to have no exoplanets which is helpful. This could be that K-means is able to identify patterns in the top 10 and top 5 features that can be used downstream in our supervised learning models.
+By evaluating the value of K with sum squared error, it is observed that less centroids are necessary with more features. The infliction point is more clear when using more features. With only 5 features, the infliction point requires 2 more centroids than with 10 features. With the K values defined, we then utilized them in our algorithim. 
+
+In terms of correctly classifying exoplanet candidates by clusters that have candidates verses clusters that don't, both models performance struggle to siphon off candidates. There are some clusters that are found to have no exoplanets which is helpful. This could be that K-means is able to identify patterns in the top 10 and top 5 features that can be used downstream in our supervised learning models.
 
 <table>
 	<tr>
