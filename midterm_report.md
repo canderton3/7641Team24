@@ -100,18 +100,28 @@ In order to choose the correct number of clusters for the K-means algorithim, th
 	</tr>
 	<tr>
 		<td>Infliction Point for Top 10: 4 clusters</td>
-		<td>Infliction Point for Top 5: 6 clusters/td>
+		<td>Infliction Point for Top 5: 6 clusters</td>
 	</tr>
+	<tr>
 		<td>Silhouette Scores: [0.5312860014581172, 0.5306977237020124, 0.6017344367945069, 0.7044771067717052, 0.7595917452118, 0.7685866920011898, 0.8016581798021736, 0.8062319048175226, 0.832988942520863, 0.8949064333793076, 0.9000650176392454, 0.9036719311910983, 0.903697463001484, 0.925826379509238]</td>
 		<td>Silhouette Scores: [0.6333416941945377, 0.41343399035839595, 0.3799644959387882, 0.38413549957093934, 0.3481638401842484, 0.35379785881633924, 0.3537538177071062, 0.22680717318968258, 0.23487392189767123, 0.24313456829646443, 0.24672386780873956, 0.25516020957620233, 0.2516264168043511, 0.2691604567720151] </td>
+	</tr>
 </table>
 
 It is observed that with more features, less centroids are necessary. However, the infliction point is more clear. With only 5 features, the infliction point requires 2 more centroids than with 10. With the K values defined, we then utilized them in our algorithim.
 
 <table>
 	<tr>
-		<th colspan="4">Top 10 Features: K = 4</th>
-		<th colspan="4">Top 5 Features: K = 6</th>
+		<th colspan="4">Using Top 10 Features</th>
+		<th colspan="4"> Using Top 5 Features</th>
+	</tr>
+	<tr>
+		<td colspan="4"><img src="images/top10_elbow.png"></td>
+		<td colspan="4"><img src="images/top5_elbow.png"></td>
+	</tr>
+	<tr>
+		<td colspan="4">Infliction Point for Top 10: 4 clusters</td>
+		<td colspan="4">Infliction Point for Top 5: 6 clusters</td>
 	</tr>
 	<tr>
 		<td colspan="4"><img src="images/kmeans_top_10.png"></td>
@@ -189,6 +199,7 @@ It is observed that with more features, less centroids are necessary. However, t
 	</tr>
 </table>
 
+<!---
 #### Using Top 10 Features
 
 ![](images/top10_elbow.png)
@@ -220,7 +231,7 @@ It is observed that with more features, less centroids are necessary. However, t
 | 5 | 1 | 6 | 14% |
 
 ![](images/kmeans_top_5_cluster.png)
-
+--->
 
 ## Gaussian Mixture Modeling
 ### Result
