@@ -26,19 +26,17 @@ from kneed import KneeLocator
 
 
 def load_data():
-    w_score_raw = 'https://raw.githubusercontent.com/canderton3/7641Team24/master/data/exoplanet_cleanedrf_w_score.csv'
-    no_score_raw = 'https://raw.githubusercontent.com/canderton3/7641Team24/master/data/exoplanet_cleanedrf.csv'
-    w_score = pd.read_csv(w_score_raw).to_numpy()
-    no_score = pd.read_csv(no_score_raw).to_numpy()
+    top_5 = pd.read_csv(r"../../data/exoplanet_cleanedrf_top_5.csv").to_numpy()
+    top_10 = pd.read_csv(r"../../data/exoplanet_cleanedrf_top_10.csv").to_numpy()
     # Get Labels
-    labels = no_score[:, 0]
+    labels = top_5[:, 0]
     # Delete Labels from data
-    w_score = np.delete(w_score, 0, axis=1)
-    no_score = np.delete(no_score, 0, axis=1)
-    return w_score, no_score, labels
+    top_10 = np.delete(top_10, 0, axis=1)
+    top_5 = np.delete(top_5, 0, axis=1)
+    return top_10, top_5, labels
 
-w_score = load_data()[0]
-no_score = load_data()[1]
+top_5 = load_data()[0]
+top_10 = load_data()[1]
 labels = load_data()[2]
 
 
@@ -53,7 +51,7 @@ def scale_data(X):
     return X
 
 
-scaled_no_score = scale_data(no_score)
+scaled_no_score = scale_data(top_5)
 
 
 
@@ -76,6 +74,7 @@ for k in range(1,16):
     kmeans = KMeans(k, **kmeans_kwargs)
     kmeans.fit(scaled_no_score)
     sse.append(kmeans.inertia_)
+    
 
 print(sse)
 
@@ -92,8 +91,8 @@ kl = KneeLocator(
     range(1, 16), sse, curve="convex", direction="decreasing"
 )
 
-print(kl.elbow)
-
+knee = kl.elbow
+print("knee ", knee)
  # A list holds the silhouette coefficients for each k
 silhouette_coefficients = []
 
@@ -103,6 +102,8 @@ for k in range(2, 16):
     kmeans.fit(scaled_no_score)
     score = silhouette_score(scaled_no_score, kmeans.labels_)
     silhouette_coefficients.append(score)
+
+
 
 plt.style.use("fivethirtyeight")
 plt.plot(range(2, 16), silhouette_coefficients)
@@ -115,7 +116,7 @@ print(silhouette_coefficients)
 
 kmeans = KMeans(
     init="random",
-    n_clusters=4,
+    n_clusters= knee,
     n_init=10,
     max_iter=300,
     random_state=42
@@ -130,6 +131,9 @@ def plot_dbscan(X, y, dbscan_labels):
     pca = PCA(n_components=2)
     x = pca.fit_transform(X)
     # Plot each cluster
+    fig = plt.figure()
+    ax = plt.axes()
+
     num_clusters = max(dbscan_labels) + 1
     for i in range(num_clusters):
         points_in_cluster = x[np.where(dbscan_labels == i)]
@@ -137,14 +141,32 @@ def plot_dbscan(X, y, dbscan_labels):
         rgb = (np.random.random(), np.random.random(), np.random.random())
         for j in range(points_in_cluster.shape[0]):
             if (labels[j] == "CANDIDATE"):  
-                plt.scatter(points_in_cluster[j, 0], points_in_cluster[j, 1], c=[rgb], marker='*')
+                ax.scatter(points_in_cluster[j, 0], points_in_cluster[j, 1], c=[rgb], marker='*')
             else:
-                plt.scatter(points_in_cluster[j, 0], points_in_cluster[j, 1], c=[rgb], marker=',')
+                ax.scatter(points_in_cluster[j, 0], points_in_cluster[j, 1], c=[rgb], marker='.')
         print("CLUSTER ", i)
-    print("finished")
+    ax.set_title("K-Means Clusters, First Two PCA Components")
+    ax.set_xlabel("PCA Component 2")
+    ax.set_ylabel("PCA Component 1")
     plt.show()
-
+    
 plot_dbscan(scaled_no_score, labels, k_labels)
+
+    # Find percent candidate / false positive in each cluster
+for i in range (max(k_labels) + 1):
+    points_in_cluster = scaled_no_score[np.where(k_labels == i)]
+    points_in_cluster_label = labels[np.where(k_labels == i)]
+    (unique, counts) = np.unique(points_in_cluster_label, return_counts=True)
+    frequencies = np.asarray((unique, counts)).T
+    print("CLUSTER ", i, frequencies)
+
+
+# print(k_labels.labels_[:5])
+
+# plt.scatter(k_labels[:, 0], k_labels[:, 1], c=k_labels, s=50, cmap='viridis')
+
+# centers = k_labels.cluster_centers_
+# plt.scatter(centers[:, 0], centers[:, 1], c='black', s=200, alpha=0.5)
 
 
 pca = PCA(2)
