@@ -32,7 +32,7 @@ After cleaning the dataset, we were left with 22 features. Since we are focusing
 As seen in the Pearson correlation, we have a few semi-correlated features, seen by the darker red and blue colors in the heatmap. However, most of the features are not highly correlated, if at all.
 
 #### Random Forest to Determine Feature Importance
-Since we are not considering koi_score (see note above) we are left with 21 features for each data point. It is very likely that most of these features are not necessarily significant for actually predicting the label of the data point. Random Forest is a very popular method to determine feature importance. The model accomplishes this by creating many decision trees, and determining where the splits in those decision trees should optimally be, on which features by maximizing the information gain at each split. By doing this, the Random Forest algorithm can rank the features based on the average information gain of the feature. We plotted the ten most important features found by Random Forest.
+Since we are not considering koi_score (see note above) we are left with 21 features for each data point. It is very likely that most of these features are not necessarily significant for actually predicting the label of the data point. We will attempt to reduce the number of features to consider using Random Forest, a very popular method to determine feature importance. The model accomplishes this by creating many decision trees, and determining where the splits in those decision trees should optimally be, on which features by maximizing the information gain at each split. By doing this, the Random Forest algorithm can rank the features based on the average information gain of the feature. We plotted the ten most important features found by Random Forest.
 
 ![](images/rf_feat_importance.png)
 
@@ -53,8 +53,9 @@ The features and their definitions are in the table below.
 
 By just taking the top ten features, we cut our number of features in half. However, five of the ten features have an importance below 0.05, which can generally be classified as "low". However, we cannot know for sure, and our manual cost of trying both the datasets with the top ten features and only the top five features is very low, so we implemented both datasets in the unsupervised learning methods below.  
 
+Interestingly, four of the top five most important features were the binary variables, flags for certain (possibly) celestial characteristics. 
+
 # Methods
-call out features of clusters that indicate candidates (process and describe some math, Why)
 ## Unsupervised
 ### K-means
 K-means is a clustering algorithm that groups points around a selected K number of centroids. K-means requires a predetermined value of K. The K-means algorithim iteratively assign's data points to the nearest centroid, then moves the centroid assignment to the average of the points assigned to it. This process continues until the algorithim converges. 
@@ -69,7 +70,7 @@ From this model the team was able to generate predicted labels and probabilities
 In order to evaluate quality of a model’s fit the team used two techniques. The first method was to compare our predicted labels to the true labels provided by the kepler dataset. This provided a simple standard error percentage we could use to determine the effectiveness of our algorithm. The team opted to not use the sum of the squares ANOVA method because it would prove to yield the same results as our previous method due to the nature of the binary prediction. The second method the team used to determine the best model/best number of clusters was with the AIC & BIC selection criterion. Graphs comparison the AIC/BIC to number of clusters are shown in the results section of GMM. The “best” model was selected on the elbow of the AIC/BIC graph.
 
 ### Hierarchical Clustering
-One form of unsupervised learning we wanted to conduct on our dataset is hierarchical clustering. This form of clustering, known as bottom-up agglomerative clustering, starts by considering each object as its own cluster. It will then repeatedly join the ‘most similar’ pair of clusters, and will merge it into a parent cluster. This process repeats until there is only one cluster left.
+Another form of unsupervised learning we wanted to conduct on our dataset is hierarchical clustering. This form of clustering, known as bottom-up agglomerative clustering, starts by considering each object as its own cluster. It will then repeatedly join the ‘most similar’ pair of clusters, and will merge it into a parent cluster. This process repeats until there is only one cluster left.
 
 Therefore, a question that arises is, if we have to determine similar clusters, how do we define that similarity? In our implementation, we chose a ‘ward’ linkage, which minimizes the variance of clusters being merged. Like our other unsupervised methods, we standardized our non-binary variables for both a dataset with the top five most important features and top ten most important features. A dendrogram was created to visualize this linkage for both datasets. Then, to determine where to make our ‘cut’ on the dendrogram for each of our datasets, we calculated the silhouette score for clustering from six to 25 clusters (clustering was done using sklearn’s AgglomerativeClustering function), selecting our optimal number of clusters that maximizes the silhouette score. 
 
@@ -78,10 +79,10 @@ A silhouette score measures how close points are to their own clusters but far f
 ### Density-Based Spatial Clustering of Applications with Noise (DBSCAN)
 Density-Based Spatial Clustering of Applications with Noise (DBSCAN) is a non-parametric, density-based clustering algorithm. DBSCAN detects arbitrarily shaped clusters in the data, where a cluster is defined as a maximal set of density-connected points. A point is described as being a part of a cluster if it is within a core point's &epsilon;-neighborhood, which means the data point is within the distance &epsilon; from the core point. In order to be called a cluster instead of outliers, each cluster must contain at least a minimum number of samples. The two parameters we tuned to create our ideal DBSCAN model were \epsilon and the minimum number of samples for a group of points to be defined as a cluster.
 
-We implemented DBSCAN using python's scikit-learn (sklearn) library, which has a built-in DBSCAN function in its cluster package. We scaled all of the non-binary data with the sklearn StandardScaler function before passing the features into the DBSCAN model. Because clustering algorithms are unsupervised, we did not feed the labels into the model. The most significant contribution we made in the creation of the DBSCAN model was parameter tuning, modifying both the acceptable &epsilon; distance and the minimum number of data points in each cluster. Then, we determined the distribution of CANDIDATE exoplanets to FALSE POSITIVES in each cluster, which we have the luxury of doing since we have labeled data. Further discussion of the results are below.
+We implemented DBSCAN using Python's scikit-learn (sklearn) library, which has a built-in DBSCAN function in its cluster package. We scaled all of the non-binary data with the sklearn StandardScaler function before passing the features into the DBSCAN model. Because clustering algorithms are unsupervised, we did not feed the labels into the model. The most significant contribution we made in the creation of the DBSCAN model was parameter tuning, modifying both the acceptable &epsilon; distance and the minimum number of data points in each cluster. Then, we determined the distribution of CANDIDATE exoplanets to FALSE POSITIVES in each cluster, which we have the luxury of doing since we have labeled data. Further discussion of the results are below.
 
-## Supervised
-### TODO: Steps Moving Forward
+# Results
+For each cluster, we used the labels from the dataset to discover the distribution of CANDIDATE and FALSE POSITIVE objects in each cluster. We calculate the percent of CANDIDATE objects in the cluster by dividing the number of CANDIDATES by the total number of objects in the cluster. To plot the clusters, we unfortunately cannot effectively visualize up to 10 dimensions; because of this issue, we chose to plot the first two principal components. We used principal component analysis (PCA) to determine the top two features that describe most of the variance in the model. In the plots, different colors denote different clusters, and star shapes denote CANDIDATE objects. We did attempt to use 3D plots to more effectively visualize the clusters but found that it was not exceedingly useful information.
 
 ## K-means
 ### Result
@@ -96,7 +97,7 @@ In order to choose the correct number of clusters for the K-means algorithim, th
 | Cluster Number | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
 |---|---|---|---|
 | 0 | 42 | 1765 | 2% |
-| 1 | 0 | 1213 | 0.03% |
+| 1 | 0 | 1213 | 0% |
 | 2 | 0 | 1| 0% |
 | 3 | 3987 | 1350 | 75% |
 
@@ -202,9 +203,13 @@ For both datasets, we have a cluster that returns a majority of candidate exopla
 
 ## DBSCAN
 ### Result
+Results are presented for both the Top 10 features dataset and the Top 5 features dataset. Even though the tuned parameters were different, the results were strikingly similar.
 #### Using Top 10 Features
 **Parameter Values:** &epsilon; = 1, min_samples = 15
 **Silhouette Coefficient:** = 0.250
+
+As seen in the other clustering algorithms, DBSCAN settled on a solution where the majority of the CANDIDATE planets are located in one cluster, with a sprinkle in another cluster, where they only make up 0.03% of the cluster data. This phenomenon will be further explained in the Discussion section. Only 7,621 data points are accounted for in this cluster spread, a difference of over 300 from the 7,995 data points passed in. This is mostly likely due to the fact that outliers found by DBSCAN will not be linked to a cluster. If sections of points do not meet the minimum sample requirement to be designated as a cluster, or are too far from other data points to be within &epsilon; distance of others, the data point will be an outlier and not counted in a cluster.
+
 | Cluster | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
 |---|---|---|---|
 | 0 | 3967 | 0 | 100% |
@@ -220,10 +225,18 @@ For both datasets, we have a cluster that returns a majority of candidate exopla
 | 10 | 0 | 104 | 0% |
 | 11 | 0 | 41 | 0% |
 
+The plot visualizing the clusters and their makeup is below. Many of the clusters seem to be overlapping, but we can most likely attribute that to some other dimension that we just cannot visualize accurately. You can see the sage green cluster that holds many of the star-shaped points and therefore where the majority of the CANDIDATE points lie. You can also pick out a few star shapes in the bright blue cluster, which are relatively close to the sage green star-shapes, which makes sense.
+
 ![](images/dbscan_clusters_top10.png)
+
+The silhouette coefficient for the 10 feature dataset is relatively low - 0.250. It is much lower than the 5 feature dataset, which has a very similar cluster spread as seen below. This could be due to the over 300 outliers that are not accounted for in the cluster distribution.
+
 #### Using Top 5 Features
 **Parameter Values:** &epsilon; = 0.5, min_samples = 6
 **Silhouette Coefficient:** = 0.928
+
+The distribution of CANDIDATE objects in each cluster is extremely similar to the 10 feature dataset, even comparing the percentages of CANDIDATE Objects in the clusters. However, the 5 feature model accounts for almost all of the data points passed in, with a total of 7,962 data points. This leaves this model with only about 30 outliers, a mere 10% of the outliers detected in the 10 feature model.
+
 | Cluster | Number of CANDIDATES | Number of FALSE POSITIVES | **Percent CANDIDATE Objects in Cluster** |
 |---|---|---|---|
 | 0 | 3986 | 0 | 100% |
@@ -239,11 +252,17 @@ For both datasets, we have a cluster that returns a majority of candidate exopla
 | 10 | 0 | 105 | 0% |
 | 11 | 0 | 52 | 0% |
 
+The plot visualizing the clusters and their distribution is below. It looks remarkably different than the 10 feature dataset. The distances between each cluster or group of clusters are much more plainly seen. Some of the clusters are still overlapping, which tells us there is most likely more dimensions that factor into the clustering that we cannot see.  
 ![](images/dbscan_clusters_top5.png)
 
+The silhouette coefficient for the 5 feature model is much higher than the 10 feature model, which we hypothesize is attributed to the lower amount of outliers, and more even distribution of FALSE POSITIVE objects.
 
 # Discussion
--(MICAELA)flow chart
+## Comparing Clustering Algorithms
+### What We've Learned About the Data
+-- use dbscan as 'case study' for characteristics of data points that are predominately CANDIDATE planets
+## Steps Moving Forward
+Now that we have implemented the unsupervised learning section of our project (techincally twice since we implemented random forest for feature selection), we can start working on the supervised learning portion. We believe that our clustering results can help us with further classification. The current plan is to use the cluster that the data point belongs to as its label. Due to the distribution of CANDIDATE data points and FALSE POSITIVE data points in the clusters determined above, the cluster label seems to be a relevant indicator of whether a data point is a CANDIDATE or FALSE POSITIVE. We are in the process of evaluating supervised algorithms such as decision trees and logistic regression to complete our ensemble model.
+
+We have completed the first stage of the creation of our machine learning model. A full flow chart with our plan is below.
 ![](images/exoplanet.png)
--talk about determining uncertainty 
--we don't yet have error
