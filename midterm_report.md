@@ -242,5 +242,6 @@ For both datasets, we have a cluster that returns a majority of candidate exopla
 
 # Discussion
 -(MICAELA)flow chart
+![](images/exoplanet.png)
 -talk about determining uncertainty 
 -we don't yet have error
