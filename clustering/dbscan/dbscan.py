@@ -51,6 +51,7 @@ def dbscan(X, y):
     cluster_0 = X_df[np.where(labels == 1)]
     assess_candidate_points(cluster_0)
     #plot_dbscan(X=X, y=y, dbscan_labels=labels)
+    return labels
 
 
 def plot_dbscan(X, y, dbscan_labels):
@@ -103,6 +104,11 @@ def assess_candidate_points(cluster_0):
 
 if __name__ == "__main__":
     top_10, top_5, labels = load_data()
-    print(labels)
-    dbscan(top_5, labels)
+
+    dbscan_labels = dbscan(top_5, labels)
+    data_w_labels = np.concatenate((top_5, dbscan_labels.reshape(dbscan_labels.shape[0], 1)), axis=1)
+    data_w_labels = np.concatenate((labels.reshape(labels.shape[0], 1), data_w_labels), axis=1)
+
+    clustered_df = pd.DataFrame(data=data_w_labels, columns=["koi_pdisposition" ,"koi_fpflag_co","koi_fpflag_nt","koi_fpflag_ss","koi_fpflag_ec","koi_prad", "cluster"])
+    clustered_df.to_csv("../../data/exoplanet_clustered_top_5.csv", index=False)
 
