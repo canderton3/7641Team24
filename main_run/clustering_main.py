@@ -1,16 +1,27 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import itertools
 from mpl_toolkits.mplot3d import Axes3D
 #sklearn imports
 from sklearn.cluster import DBSCAN
 from sklearn.decomposition import PCA #Principal Component Analysis
 from sklearn.manifold import TSNE #T-Distributed Stochastic Neighbor Embedding
+
 from sklearn.cluster import KMeans #K-Means Clustering
 from sklearn.preprocessing import StandardScaler #used for 'Feature Scaling'
 from sklearn import metrics
 from kneed import KneeLocator
+
+
+import scipy.cluster.hierarchy as sch
+from sklearn.cluster import AgglomerativeClustering
+from sklearn.mixture import GaussianMixture
 from sklearn.metrics import silhouette_score
+from sklearn.preprocessing import StandardScaler #used for 'Feature Scaling'
+
+from clustering.gaussian_mixture_modeling.GMM import n_components_range, bic, spl, bars, cv_types
+from main_run.clustering_run import plot_label
 
 
 
@@ -94,6 +105,13 @@ class MainMethods():
         ax.set_ylabel("PCA Component 1")
         plt.show()
 
+    def build_dendrogram(self, X):
+        sch.dendrogram(sch.linkage(X, method='ward'))
+        plt.title('Dendrogram')
+        plt.xlabel('Data Point')
+        plt.ylabel('Euclidean Distances')
+        plt.show()
+
 class ClusterModels:
     #dbscan model scaled data: X
     def dbscan_model(self, X):
@@ -167,7 +185,36 @@ class ClusterModels:
 
         return k_labels, silhouette_coefficients
 
-    def gmm_model(self, X ):
+    # Create clustering, check silhouette scores
+    def Hierarchical(self, X):
+        flag = True
+        sils = []
+        cluster = 6
+        while (flag):
+            # Compute Hierarchical Clustering
+            hc = AgglomerativeClustering(n_clusters=cluster, affinity='euclidean', linkage='ward')
+            hier_labels = hc.fit_predict(X)
+            sils.append(metrics.silhouette_score(X, hier_labels))
+            print("Silhouette Coefficient: %0.3f"
+                  % metrics.silhouette_score(X, hier_labels))
+            cluster += 1
+            if (cluster > 25):
+                break
+
+        # Plot Silhouette Coefficients
+        clusters = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+        sil_clusters = plt.plot(clusters, sils)
+        plt.title('Silhouette Scores')
+        plt.xlabel('Number of Clusters')
+        plt.ylabel('Score')
+        plt.show()
+
+        for i, j in enumerate(sils):
+            if j == max(sils):
+                max_cluster = i + 6
+        return  hier_labels, sils
+
+    def gmm_model(self, X, plot_label):
         # Determining number of components using BIC
         lowest_bic = np.infty
         bic = []
@@ -208,7 +255,6 @@ class ClusterModels:
             spl.legend([b[0] for b in bars], cv_types)
         else:
             pass
-
         # Select 2 as the number of components and build final GMM model
         final_gmm = GaussianMixture(n_components=2)
         final_gmm.fit(X)
@@ -226,3 +272,5 @@ class ClusterModels:
         # I think bars is the BIC score?
 
         return labels_cluster_gmm, bars
+
+
