@@ -112,3 +112,4 @@ if __name__ == "__main__":
     clustered_df = pd.DataFrame(data=data_w_labels, columns=["koi_pdisposition" ,"koi_fpflag_co","koi_fpflag_nt","koi_fpflag_ss","koi_fpflag_ec","koi_prad", "cluster"])
     clustered_df.to_csv("../../data/exoplanet_clustered_top_5.csv", index=False)
 
+
