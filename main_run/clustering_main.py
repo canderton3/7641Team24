@@ -29,7 +29,7 @@ class MainMethods:
     '''
         Load data and scale non-binary variables
     '''
-    def load_scaled_data(self, file_path):
+    def load_scaled_data(file_path):
         # read in file
         X= pd.read_csv(file_path).to_numpy()
         # Get Labels
@@ -140,9 +140,10 @@ class MainMethods:
         # Assess candidate distribution
         self.assess_candidate_points(X, y, cluster_labels, model_name)
 
+
 class ClusterModels:
     #dbscan model scaled data: X
-    def dbscan_model(self, X):
+    def dbscan_model(X):
         ep = 0.5
         min_samples = 6
         # Compute DBSCAN
@@ -152,7 +153,7 @@ class ClusterModels:
         print("Silhouette Coefficient: %0.3f" % sc)
         return cluster_labels, sc
 
-    def kmeans_model(self, X, plot_label):
+    def kmeans_model(X, plot_label):
         # set parameters
         kmeans_kwargs = {
             'init': "random",
@@ -162,7 +163,9 @@ class ClusterModels:
             'random_state': 42,
         }
 
-        # A list holds the SSE values for each k for elbow curve
+        '''
+        A list sse holds the SSE values for each k for elbow curve
+        '''
         sse = []
         for k in range(1, kmeans_kwargs['n_clusters']+1):
             kmeans = KMeans(k, **kmeans_kwargs)
@@ -177,11 +180,15 @@ class ClusterModels:
             plt.show()
         else:
             pass
-        #find elbow in elbow curve
+        '''find elbow in elbow curve'''
         kl = KneeLocator(range(1, kmeans_kwargs['n_clusters']+1), sse, curve="convex", direction="decreasing")
         knee = kl.elbow
         #print("knee ", knee)
-        # A list holds the silhouette coefficients for each k
+
+
+        ''' 
+        second test is for the silhouette coefficients for each k
+        '''
         silhouette_coefficients = []
         # Notice you start at 2 clusters for silhouette coefficient
         for k in range(2, kmeans_kwargs['n_clusters']+1):
@@ -189,6 +196,7 @@ class ClusterModels:
             kmeans.fit(X)
             score = silhouette_score(X, kmeans.labels_)
             silhouette_coefficients.append(score)
+
 
         if plot_label:
             plt.style.use("fivethirtyeight")
@@ -200,21 +208,22 @@ class ClusterModels:
         else:
             pass
 
-        print(silhouette_coefficients)
-
-        kmeans = KMeans(
-            init="random",
-            n_clusters=knee,
-            n_init=10,
-            max_iter=300,
-            random_state=42
-        )
+        print("Silhouette Coefficient: %0.3f" % max(silhouette_coefficients))
+        kmeans_kwargs  = {
+            'init': "random",
+            'n_clusters': knee,
+            'n_init': 10,
+            'max_iter': 300,
+            'random_state': 42,
+        }
+        kmeans = KMeans(knee, **kmeans_kwargs)
         k_labels = kmeans.fit_predict(X)
 
-        return k_labels, silhouette_coefficients
+
+        return k_labels, max(silhouette_coefficients)
 
     # Create clustering, check silhouette scores
-    def hierarchical(self, X):
+    def hierarchical(X, plot_label):
         flag = True
         sils = []
         cluster = 6
@@ -223,26 +232,32 @@ class ClusterModels:
             hc = AgglomerativeClustering(n_clusters=cluster, affinity='euclidean', linkage='ward')
             hier_labels = hc.fit_predict(X)
             sils.append(metrics.silhouette_score(X, hier_labels))
-            print("Silhouette Coefficient: %0.3f"
-                  % metrics.silhouette_score(X, hier_labels))
+            # print("Silhouette Coefficient: %0.3f"
+            #       % metrics.silhouette_score(X, hier_labels))
             cluster += 1
             if (cluster > 25):
                 break
 
         # Plot Silhouette Coefficients
         clusters = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
-        sil_clusters = plt.plot(clusters, sils)
-        plt.title('Silhouette Scores')
-        plt.xlabel('Number of Clusters')
-        plt.ylabel('Score')
-        plt.show()
+        #sil_clusters = plt.plot(clusters, sils)
+        if plot_label:
+            plt.title('Silhouette Scores')
+            plt.xlabel('Number of Clusters')
+            plt.ylabel('Score')
+            plt.show()
+        else:
+            pass
 
-        for i, j in enumerate(sils):
-            if j == max(sils):
-                max_cluster = i + 6
-        return  hier_labels, sils
+        #run model based on highest sil score
+        cluster = 6 + 1 + sils.index(max(sils))
+        hc = AgglomerativeClustering(n_clusters=cluster, affinity='euclidean', linkage='ward')
+        hier_labels = hc.fit_predict(X)
 
-    def gmm_model(self, X, plot_label):
+        #print(cluster, min(hier_labels))
+        return hier_labels, max(sils)
+
+    def gmm_model(X, plot_label):
         # Determining number of components using BIC
         lowest_bic = np.infty
         bic = []
@@ -258,22 +273,32 @@ class ClusterModels:
                 if bic[-1] < lowest_bic:
                     lowest_bic = bic[-1]
                     low_gmm = gmm
+        #print(len(bic))
 
+        kl = KneeLocator(range(1, len(bic)+1), bic, curve="convex", direction="decreasing")
+        knee = kl.elbow
+        print('knee', knee)
+
+        minVal = min(bic[:]);
+        maxVal = max(bic[:]);
+        bic_norm = (bic- minVal) / (maxVal - minVal)
+        #bic_norm = [float(i)/max(bic) for i in bic]
         bic = np.array(bic)
         color_iter = itertools.cycle(['navy', 'turquoise', 'cornflowerblue',
                                       'darkorange'])
-        clf = low_gmm
-        bars = []
-        # Plot the BIC scores for each covariance type (star the lowest score)
-        plt.figure(figsize=(8, 6))
-        spl = plt.subplot(2, 1, 1)
-        for i, (cv_type, color) in enumerate(zip(cv_types, color_iter)):
-            xpos = np.array(n_components_range) + .2 * (i - 2)
-            bars.append(plt.bar(xpos, bic[i * len(n_components_range):
-                (i + 1) * len(n_components_range)],
-                width=.2, color=color))
 
+        # Plot the BIC scores for each covariance type (star the lowest score)
         if plot_label:
+            clf = low_gmm
+            bars = []
+            plt.figure(figsize=(8, 6))
+            spl = plt.subplot(2, 1, 1)
+            for i, (cv_type, color) in enumerate(zip(cv_types, color_iter)):
+                xpos = np.array(n_components_range) + .2 * (i - 2)
+                bars.append(plt.bar(xpos, bic[i * len(n_components_range):
+                    (i + 1) * len(n_components_range)],
+                    width=.2, color=color))
+
             plt.xticks(n_components_range)
             plt.ylim([bic.min() * 1.01 - .01 * bic.max(), bic.max()])
             plt.title('BIC score per model')
@@ -285,7 +310,8 @@ class ClusterModels:
         else:
             pass
         # Select 2 as the number of components and build final GMM model
-        final_gmm = GaussianMixture(n_components=2)
+        #final_gmm = GaussianMixture(n_components=2)
+        final_gmm = GaussianMixture(n_components=knee)
         final_gmm.fit(X)
         labels_cluster_gmm = gmm.predict(X)
 
@@ -299,8 +325,10 @@ class ClusterModels:
         # plt.scatter(X_pca_array[:, 0], X_pca_array[:, 1], c=labels_cluster_gmm)
 
         # I think bars is the BIC score?
+        norm_data = 1 - bic_norm[knee]
+        print(bic_norm[knee-1])
 
-        return labels_cluster_gmm, bars
+        return labels_cluster_gmm, bic_norm[knee-1]
 
 
 
