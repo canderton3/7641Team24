@@ -21,7 +21,6 @@ top10_filename = r"../../data/exoplanet_cleanedrf_top_10.csv"
 scaled_top_10, top_10_labels  = mm.load_scaled_data(top10_filename)
 scaled_top_5, top_5_labels = mm.load_scaled_data(top5_filename)
 
-
 #DBSCAN
 
 dbscan_labels, dbscan_sc = mm.dbscan(scaled_top_5)
