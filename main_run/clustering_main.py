@@ -20,15 +20,18 @@ from sklearn.mixture import GaussianMixture
 from sklearn.metrics import silhouette_score
 from sklearn.preprocessing import StandardScaler #used for 'Feature Scaling'
 
-from clustering.gaussian_mixture_modeling.GMM import n_components_range, bic, spl, bars, cv_types
-from main_run.clustering_run import plot_label
+#from clustering.gaussian_mixture_modeling.GMM import n_components_range, bic, spl, bars, cv_types
+#from main_run.clustering_run import plot_label
 
 
 
-class MainMethods():
-    def load_scaled_data(self, file):
+class MainMethods:
+    '''
+        Load data and scale non-binary variables
+    '''
+    def load_scaled_data(self, file_path):
         # read in file
-        X= pd.read_csv(file).to_numpy()
+        X= pd.read_csv(file_path).to_numpy()
         # Get Labels
         top_n_labels = X[:, 0]
         # Delete Labels from data
@@ -41,46 +44,54 @@ class MainMethods():
         scaled_top_n = np.concatenate((binary_vars, scaled_numeric), axis=1)
         return scaled_top_n, top_n_labels
 
-        # Find percent candidate / false positive in each cluster
 
-    def candidate_check(self, X, y, cluster_labels):
+    '''
+        Determine distribution of candidates /  percent of candidates per cluster
+    '''
+    def assess_candidate_points(self, X, y, cluster_labels, model_name):
         candidate_count = {}
-        for i in range(max(cluster_labels) + 1):
-            points_in_cluster_label = y[np.where(cluster_labels == i)]
-            (unique, counts) = np.unique(points_in_cluster_label, return_counts=True)
-            frequencies = np.asarray((unique, counts)).T
-            print("CLUSTER ", i)
-            print(frequencies)
-            candidate_count[i] = frequencies
-        # Assess first cluster data
-        cluster_0 = X[np.where(cluster_labels == 1)]
-        self.assess_candidate_points(cluster_0)
-        # plot_dbscan(X=X, y=y, dbscan_labels=labels)
+        file_path = '../model_statistics/' + model_name +'_stats.txt'
+
+        with open(file_path, 'w') as f:
+            for i in range(max(cluster_labels) + 1):
+                points_in_cluster_label = y[np.where(cluster_labels == i)]
+                (unique, counts) = np.unique(points_in_cluster_label, return_counts=True)
+                frequencies = np.asarray((unique, counts)).T
+                cluster_name = "\n\nCLUSTER " + str(i) + '\n'
+                f.write(cluster_name)
+                f.write(str(frequencies) +'\n')
+                candidate_count[i] = frequencies
+
+                # Assess cluster makeups
+                cluster = X[np.where(cluster_labels == i)]
+                df = pd.DataFrame(data=cluster, columns=["koi_fpflag_co","koi_fpflag_nt","koi_fpflag_ss","koi_fpflag_ec","koi_prad"])
+                # Averages
+                f.write("AVERAGES\n koi_fpflag_co: {}\n koi_fpflag_nt: {}\n koi_fpflag_ss: {}\n koi_fpflag_ec: {}\n koi_prad: {}\n".format(
+                    df["koi_fpflag_co"].mean(),
+                    df["koi_fpflag_nt"].mean(),
+                    df["koi_fpflag_ss"].mean(),
+                    df["koi_fpflag_ec"].mean(),
+                    df["koi_prad"].mean()))
+                # Modes for Binary
+                f.write("MODES\n koi_fpflag_co: {}\n koi_fpflag_nt: {}\n koi_fpflag_ss: {}\n koi_fpflag_ec: {}".format(
+                    df["koi_fpflag_co"].mode(),
+                    df["koi_fpflag_nt"].mode(),
+                    df["koi_fpflag_ss"].mode(),
+                    df["koi_fpflag_ec"].mode()))
+
+                f.write("COUNT ZEROS\n koi_fpflag_co: {}\n koi_fpflag_nt: {}\n koi_fpflag_ss: {}\n koi_fpflag_ec: {}".format(
+                    df["koi_fpflag_co"].value_counts(),
+                    df["koi_fpflag_nt"].value_counts(),
+                    df["koi_fpflag_ss"].value_counts(),
+                    df["koi_fpflag_ec"].value_counts()))
+
         return candidate_count
 
-    def assess_candidate_points(self, cluster_0):
-        print(cluster_0)
-        df = pd.DataFrame(data=cluster_0, columns=["koi_fpflag_co","koi_fpflag_nt","koi_fpflag_ss","koi_fpflag_ec","koi_prad"])
-        # Averages
-        print("AVERAGES\n koi_fpflag_co: {}\n koi_fpflag_nt: {}\n koi_fpflag_ss: {}\n koi_fpflag_ec: {}\n koi_prad: {}".format(
-            df["koi_fpflag_co"].mean(),
-            df["koi_fpflag_nt"].mean(),
-            df["koi_fpflag_ss"].mean(),
-            df["koi_fpflag_ec"].mean(),
-            df["koi_prad"].mean()))
-        # Modes for Binary
-        print("MODES\n koi_fpflag_co: {}\n koi_fpflag_nt: {}\n koi_fpflag_ss: {}\n koi_fpflag_ec: {}".format(
-            df["koi_fpflag_co"].mode(),
-            df["koi_fpflag_nt"].mode(),
-            df["koi_fpflag_ss"].mode(),
-            df["koi_fpflag_ec"].mode()))
-
-        print("COUNT ZEROS: koi_fpflag_co: {}\n koi_fpflag_nt: {}\n koi_fpflag_ss: {}\n koi_fpflag_ec: {}".format(
-            df["koi_fpflag_co"].value_counts(),
-            df["koi_fpflag_nt"].value_counts(),
-            df["koi_fpflag_ss"].value_counts(),
-            df["koi_fpflag_ec"].value_counts()))
-
+    '''
+        Plot first two PCA components
+        CANDIDATES: Star points
+        FALSE POSITIVES: dotted points
+    '''
     def plot_pca(self, X, y, cluster_labels):
         # Get two most important factors to plot
         pca = PCA(n_components=2)
@@ -105,12 +116,29 @@ class MainMethods():
         ax.set_ylabel("PCA Component 1")
         plt.show()
 
+    '''
+        Build Dendrogram for Hierarchical
+    '''
     def build_dendrogram(self, X):
         sch.dendrogram(sch.linkage(X, method='ward'))
         plt.title('Dendrogram')
         plt.xlabel('Data Point')
         plt.ylabel('Euclidean Distances')
         plt.show()
+
+    '''
+        Plot PCA components (or dendrogram for hierarchical)
+        Check distribution of CANDIDATE points in clusters
+    '''
+    def model_evaluation(self, X, y, cluster_labels, model_name, plot_flag):
+        # Plot
+        if (plot_flag):
+            if (model_name == "hierarchical"):
+                self.build_dendrogram(X)
+            else:
+                self.plot_pca(X, y, cluster_labels)
+        # Assess candidate distribution
+        self.assess_candidate_points(X, y, cluster_labels, model_name)
 
 class ClusterModels:
     #dbscan model scaled data: X
@@ -186,7 +214,7 @@ class ClusterModels:
         return k_labels, silhouette_coefficients
 
     # Create clustering, check silhouette scores
-    def Hierarchical(self, X):
+    def hierarchical(self, X):
         flag = True
         sils = []
         cluster = 6
@@ -237,13 +265,14 @@ class ClusterModels:
         clf = low_gmm
         bars = []
         # Plot the BIC scores for each covariance type (star the lowest score)
-            plt.figure(figsize=(8, 6))
-            spl = plt.subplot(2, 1, 1)
-            for i, (cv_type, color) in enumerate(zip(cv_types, color_iter)):
-                xpos = np.array(n_components_range) + .2 * (i - 2)
-                bars.append(plt.bar(xpos, bic[i * len(n_components_range):
-                                              (i + 1) * len(n_components_range)],
-                                    width=.2, color=color))
+        plt.figure(figsize=(8, 6))
+        spl = plt.subplot(2, 1, 1)
+        for i, (cv_type, color) in enumerate(zip(cv_types, color_iter)):
+            xpos = np.array(n_components_range) + .2 * (i - 2)
+            bars.append(plt.bar(xpos, bic[i * len(n_components_range):
+                (i + 1) * len(n_components_range)],
+                width=.2, color=color))
+
         if plot_label:
             plt.xticks(n_components_range)
             plt.ylim([bic.min() * 1.01 - .01 * bic.max(), bic.max()])
@@ -272,5 +301,7 @@ class ClusterModels:
         # I think bars is the BIC score?
 
         return labels_cluster_gmm, bars
+
+
 
 

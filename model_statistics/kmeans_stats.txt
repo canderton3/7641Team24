@@ -1,0 +1,118 @@
+
+
+CLUSTER 0
+[['FALSE POSITIVE' 834]]
+AVERAGES
+ koi_fpflag_co: 0.934052757793765
+ koi_fpflag_nt: 0.328537170263789
+ koi_fpflag_ss: 0.3129496402877698
+ koi_fpflag_ec: 0.8848920863309353
+ koi_prad: -0.03281638204578047
+MODES
+ koi_fpflag_co: 0    1
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    0
+dtype: object
+ koi_fpflag_ec: 0    1
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 1    779
+0     55
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    560
+1    274
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 0    573
+1    261
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 1    738
+0     96
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 1
+[['FALSE POSITIVE' 1]]
+AVERAGES
+ koi_fpflag_co: 0.0
+ koi_fpflag_nt: 0.0
+ koi_fpflag_ss: 1.0
+ koi_fpflag_ec: 0.0
+ koi_prad: 83.36193295514327
+MODES
+ koi_fpflag_co: 0    0
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    1
+dtype: object
+ koi_fpflag_ec: 0    0
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 0    1
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    1
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 1    1
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 0    1
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 2
+[['CANDIDATE' 33]
+ ['FALSE POSITIVE' 1409]]
+AVERAGES
+ koi_fpflag_co: 0.1678224687933426
+ koi_fpflag_nt: 0.0013869625520110957
+ koi_fpflag_ss: 0.9993065187239945
+ koi_fpflag_ec: 0.03467406380027739
+ koi_prad: 0.16573375330583748
+MODES
+ koi_fpflag_co: 0    0
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    1
+dtype: object
+ koi_fpflag_ec: 0    0
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 0    1200
+1     242
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    1440
+1       2
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 1    1441
+0       1
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 0    1392
+1      50
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 3
+[['CANDIDATE' 3199]
+ ['FALSE POSITIVE' 919]]
+AVERAGES
+ koi_fpflag_co: 0.08693540553666829
+ koi_fpflag_nt: 0.1160757649344342
+ koi_fpflag_ss: 0.0
+ koi_fpflag_ec: 0.02015541525012142
+ koi_prad: -0.0673348455850813
+MODES
+ koi_fpflag_co: 0    0
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    0
+dtype: object
+ koi_fpflag_ec: 0    0
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 0    3760
+1     358
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    3640
+1     478
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 0    4118
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 0    4035
+1      83
+Name: koi_fpflag_ec, dtype: int64

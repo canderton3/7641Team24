@@ -1,0 +1,662 @@
+
+
+CLUSTER 0
+[['CANDIDATE' 32]
+ ['FALSE POSITIVE' 877]]
+AVERAGES
+ koi_fpflag_co: 0.0
+ koi_fpflag_nt: 0.0
+ koi_fpflag_ss: 1.0
+ koi_fpflag_ec: 0.0
+ koi_prad: 0.036848497445150244
+MODES
+ koi_fpflag_co: 0    0
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    1
+dtype: object
+ koi_fpflag_ec: 0    0
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 0    909
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    909
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 1    909
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 0    909
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 1
+[['FALSE POSITIVE' 10]]
+AVERAGES
+ koi_fpflag_co: 0.4
+ koi_fpflag_nt: 0.0
+ koi_fpflag_ss: 1.0
+ koi_fpflag_ec: 0.0
+ koi_prad: 1.7919886492874486
+MODES
+ koi_fpflag_co: 0    0
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    1
+dtype: object
+ koi_fpflag_ec: 0    0
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 0    6
+1    4
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    10
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 1    10
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 0    10
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 2
+[['FALSE POSITIVE' 8]]
+AVERAGES
+ koi_fpflag_co: 0.25
+ koi_fpflag_nt: 0.0
+ koi_fpflag_ss: 1.0
+ koi_fpflag_ec: 0.125
+ koi_prad: 3.064812345297598
+MODES
+ koi_fpflag_co: 0    0
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    1
+dtype: object
+ koi_fpflag_ec: 0    0
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 0    6
+1    2
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    8
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 1    8
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 0    7
+1    1
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 3
+[['FALSE POSITIVE' 358]]
+AVERAGES
+ koi_fpflag_co: 1.0
+ koi_fpflag_nt: 0.0
+ koi_fpflag_ss: 0.0
+ koi_fpflag_ec: 0.0
+ koi_prad: -0.06090806767338548
+MODES
+ koi_fpflag_co: 0    1
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    0
+dtype: object
+ koi_fpflag_ec: 0    0
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 1    358
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    358
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 0    358
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 0    358
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 4
+[['FALSE POSITIVE' 149]]
+AVERAGES
+ koi_fpflag_co: 0.0
+ koi_fpflag_nt: 1.0
+ koi_fpflag_ss: 0.0
+ koi_fpflag_ec: 0.0
+ koi_prad: 0.1221652898009793
+MODES
+ koi_fpflag_co: 0    0
+dtype: object
+ koi_fpflag_nt: 0    1
+dtype: object
+ koi_fpflag_ss: 0    0
+dtype: object
+ koi_fpflag_ec: 0    0
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 0    149
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 1    149
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 0    149
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 0    149
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 5
+[['FALSE POSITIVE' 4]]
+AVERAGES
+ koi_fpflag_co: 0.0
+ koi_fpflag_nt: 0.25
+ koi_fpflag_ss: 0.75
+ koi_fpflag_ec: 0.0
+ koi_prad: 8.519735565400133
+MODES
+ koi_fpflag_co: 0    0
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    1
+dtype: object
+ koi_fpflag_ec: 0    0
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 0    4
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    3
+1    1
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 1    3
+0    1
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 0    4
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 6
+[['CANDIDATE' 24]]
+AVERAGES
+ koi_fpflag_co: 0.0
+ koi_fpflag_nt: 0.0
+ koi_fpflag_ss: 0.0
+ koi_fpflag_ec: 0.0
+ koi_prad: 0.27549415076001366
+MODES
+ koi_fpflag_co: 0    0
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    0
+dtype: object
+ koi_fpflag_ec: 0    0
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 0    24
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    24
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 0    24
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 0    24
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 7
+[['FALSE POSITIVE' 83]]
+AVERAGES
+ koi_fpflag_co: 0.0
+ koi_fpflag_nt: 0.0
+ koi_fpflag_ss: 0.0
+ koi_fpflag_ec: 1.0
+ koi_prad: -0.0813275607219932
+MODES
+ koi_fpflag_co: 0    0
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    0
+dtype: object
+ koi_fpflag_ec: 0    1
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 0    83
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    83
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 0    83
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 1    83
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 8
+[['FALSE POSITIVE' 7]]
+AVERAGES
+ koi_fpflag_co: 0.8571428571428571
+ koi_fpflag_nt: 1.0
+ koi_fpflag_ss: 1.0
+ koi_fpflag_ec: 0.5714285714285714
+ koi_prad: -0.04350548716136783
+MODES
+ koi_fpflag_co: 0    1
+dtype: object
+ koi_fpflag_nt: 0    1
+dtype: object
+ koi_fpflag_ss: 0    1
+dtype: object
+ koi_fpflag_ec: 0    1
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 1    6
+0    1
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 1    7
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 1    7
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 1    4
+0    3
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 9
+[['FALSE POSITIVE' 191]]
+AVERAGES
+ koi_fpflag_co: 0.0
+ koi_fpflag_nt: 0.0
+ koi_fpflag_ss: 1.0
+ koi_fpflag_ec: 0.0
+ koi_prad: 0.31589070955698967
+MODES
+ koi_fpflag_co: 0    0
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    1
+dtype: object
+ koi_fpflag_ec: 0    0
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 0    191
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    191
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 1    191
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 0    191
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 10
+[['FALSE POSITIVE' 30]]
+AVERAGES
+ koi_fpflag_co: 0.0
+ koi_fpflag_nt: 0.0
+ koi_fpflag_ss: 1.0
+ koi_fpflag_ec: 0.0
+ koi_prad: 0.9813035616705111
+MODES
+ koi_fpflag_co: 0    0
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    1
+dtype: object
+ koi_fpflag_ec: 0    0
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 0    30
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    30
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 1    30
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 0    30
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 11
+[['FALSE POSITIVE' 304]]
+AVERAGES
+ koi_fpflag_co: 1.0
+ koi_fpflag_nt: 0.0
+ koi_fpflag_ss: 0.0
+ koi_fpflag_ec: 1.0
+ koi_prad: -0.069020843764872
+MODES
+ koi_fpflag_co: 0    1
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    0
+dtype: object
+ koi_fpflag_ec: 0    1
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 1    304
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    304
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 0    304
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 1    304
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 12
+[['FALSE POSITIVE' 234]]
+AVERAGES
+ koi_fpflag_co: 1.0
+ koi_fpflag_nt: 0.0
+ koi_fpflag_ss: 1.0
+ koi_fpflag_ec: 0.0
+ koi_prad: -0.009852827292319111
+MODES
+ koi_fpflag_co: 0    1
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    1
+dtype: object
+ koi_fpflag_ec: 0    0
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 1    234
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    234
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 1    234
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 0    234
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 13
+[['FALSE POSITIVE' 94]]
+AVERAGES
+ koi_fpflag_co: 1.0
+ koi_fpflag_nt: 1.0
+ koi_fpflag_ss: 0.0
+ koi_fpflag_ec: 0.0
+ koi_prad: -0.026923298518230478
+MODES
+ koi_fpflag_co: 0    1
+dtype: object
+ koi_fpflag_nt: 0    1
+dtype: object
+ koi_fpflag_ss: 0    0
+dtype: object
+ koi_fpflag_ec: 0    0
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 1    94
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 1    94
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 0    94
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 0    94
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 14
+[['FALSE POSITIVE' 55]]
+AVERAGES
+ koi_fpflag_co: 0.0
+ koi_fpflag_nt: 1.0
+ koi_fpflag_ss: 0.0
+ koi_fpflag_ec: 1.0
+ koi_prad: -0.04967413013475338
+MODES
+ koi_fpflag_co: 0    0
+dtype: object
+ koi_fpflag_nt: 0    1
+dtype: object
+ koi_fpflag_ss: 0    0
+dtype: object
+ koi_fpflag_ec: 0    1
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 0    55
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 1    55
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 0    55
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 1    55
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 15
+[['FALSE POSITIVE' 1]]
+AVERAGES
+ koi_fpflag_co: 1.0
+ koi_fpflag_nt: 0.0
+ koi_fpflag_ss: 1.0
+ koi_fpflag_ec: 0.0
+ koi_prad: 14.758554707504821
+MODES
+ koi_fpflag_co: 0    1
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    1
+dtype: object
+ koi_fpflag_ec: 0    0
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 1    1
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    1
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 1    1
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 0    1
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 16
+[['FALSE POSITIVE' 1]]
+AVERAGES
+ koi_fpflag_co: 0.0
+ koi_fpflag_nt: 0.0
+ koi_fpflag_ss: 1.0
+ koi_fpflag_ec: 0.0
+ koi_prad: 83.36193295514327
+MODES
+ koi_fpflag_co: 0    0
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    1
+dtype: object
+ koi_fpflag_ec: 0    0
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 0    1
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    1
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 1    1
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 0    1
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 17
+[['FALSE POSITIVE' 10]]
+AVERAGES
+ koi_fpflag_co: 1.0
+ koi_fpflag_nt: 0.0
+ koi_fpflag_ss: 0.9
+ koi_fpflag_ec: 1.0
+ koi_prad: 1.3140871529310718
+MODES
+ koi_fpflag_co: 0    1
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    1
+dtype: object
+ koi_fpflag_ec: 0    1
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 1    10
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    10
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 1    9
+0    1
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 1    10
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 18
+[['CANDIDATE' 1]
+ ['FALSE POSITIVE' 4]]
+AVERAGES
+ koi_fpflag_co: 0.2
+ koi_fpflag_nt: 0.0
+ koi_fpflag_ss: 1.0
+ koi_fpflag_ec: 0.0
+ koi_prad: 5.123972100023563
+MODES
+ koi_fpflag_co: 0    0
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    1
+dtype: object
+ koi_fpflag_ec: 0    0
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 0    4
+1    1
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    5
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 1    5
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 0    5
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 19
+[['FALSE POSITIVE' 49]]
+AVERAGES
+ koi_fpflag_co: 0.0
+ koi_fpflag_nt: 0.0
+ koi_fpflag_ss: 1.0
+ koi_fpflag_ec: 1.0
+ koi_prad: 0.02438947682906406
+MODES
+ koi_fpflag_co: 0    0
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    1
+dtype: object
+ koi_fpflag_ec: 0    1
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 0    49
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    49
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 1    49
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 1    49
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 20
+[['FALSE POSITIVE' 119]]
+AVERAGES
+ koi_fpflag_co: 1.0
+ koi_fpflag_nt: 1.0
+ koi_fpflag_ss: 0.0
+ koi_fpflag_ec: 1.0
+ koi_prad: -0.060313950532911664
+MODES
+ koi_fpflag_co: 0    1
+dtype: object
+ koi_fpflag_nt: 0    1
+dtype: object
+ koi_fpflag_ss: 0    0
+dtype: object
+ koi_fpflag_ec: 0    1
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 1    119
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 1    119
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 0    119
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 1    119
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 21
+[['FALSE POSITIVE' 246]]
+AVERAGES
+ koi_fpflag_co: 1.0
+ koi_fpflag_nt: 0.0
+ koi_fpflag_ss: 1.0
+ koi_fpflag_ec: 1.0
+ koi_prad: -0.027842852431398075
+MODES
+ koi_fpflag_co: 0    1
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    1
+dtype: object
+ koi_fpflag_ec: 0    1
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 1    246
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    246
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 1    246
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 1    246
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 22
+[['FALSE POSITIVE' 4]]
+AVERAGES
+ koi_fpflag_co: 0.0
+ koi_fpflag_nt: 1.0
+ koi_fpflag_ss: 0.0
+ koi_fpflag_ec: 0.0
+ koi_prad: 1.1968500395044754
+MODES
+ koi_fpflag_co: 0    0
+dtype: object
+ koi_fpflag_nt: 0    1
+dtype: object
+ koi_fpflag_ss: 0    0
+dtype: object
+ koi_fpflag_ec: 0    0
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 0    4
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 1    4
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 0    4
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 0    4
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 23
+[['FALSE POSITIVE' 325]]
+AVERAGES
+ koi_fpflag_co: 0.0
+ koi_fpflag_nt: 1.0
+ koi_fpflag_ss: 0.0
+ koi_fpflag_ec: 0.0
+ koi_prad: -0.07680743664079483
+MODES
+ koi_fpflag_co: 0    0
+dtype: object
+ koi_fpflag_nt: 0    1
+dtype: object
+ koi_fpflag_ss: 0    0
+dtype: object
+ koi_fpflag_ec: 0    0
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 0    325
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 1    325
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 0    325
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 0    325
+Name: koi_fpflag_ec, dtype: int64
+
+CLUSTER 24
+[['CANDIDATE' 3175]]
+AVERAGES
+ koi_fpflag_co: 0.0
+ koi_fpflag_nt: 0.0
+ koi_fpflag_ss: 0.0
+ koi_fpflag_ec: 0.0
+ koi_prad: -0.07980128800022457
+MODES
+ koi_fpflag_co: 0    0
+dtype: object
+ koi_fpflag_nt: 0    0
+dtype: object
+ koi_fpflag_ss: 0    0
+dtype: object
+ koi_fpflag_ec: 0    0
+dtype: objectCOUNT ZEROS
+ koi_fpflag_co: 0    3175
+Name: koi_fpflag_co, dtype: int64
+ koi_fpflag_nt: 0    3175
+Name: koi_fpflag_nt, dtype: int64
+ koi_fpflag_ss: 0    3175
+Name: koi_fpflag_ss, dtype: int64
+ koi_fpflag_ec: 0    3175
+Name: koi_fpflag_ec, dtype: int64
