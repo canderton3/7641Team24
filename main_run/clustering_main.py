@@ -26,12 +26,14 @@ from sklearn.preprocessing import StandardScaler #used for 'Feature Scaling'
 
 
 class MainMethods:
+    def __init__(self):
+        print("init")
     '''
         Load data and scale non-binary variables
     '''
-    def load_scaled_data(file_path):
+    def load_scaled_data(self, file_path):
         # read in file
-        X= pd.read_csv(file_path).to_numpy()
+        X = pd.read_csv(file_path).to_numpy()
         # Get Labels
         top_n_labels = X[:, 0]
         # Delete Labels from data
@@ -92,7 +94,7 @@ class MainMethods:
         CANDIDATES: Star points
         FALSE POSITIVES: dotted points
     '''
-    def plot_pca(self, X, y, cluster_labels):
+    def plot_pca(self, X, y, cluster_labels, model_name):
         # Get two most important factors to plot
         pca = PCA(n_components=2)
         x = pca.fit_transform(X)
@@ -111,39 +113,16 @@ class MainMethods:
                 else:
                     ax.scatter(points_in_cluster[j, 0], points_in_cluster[j, 1], c=[rgb], marker='.')
             print("CLUSTER ", i)
-        ax.set_title("DBSCAN Clusters, First Two PCA Components")
+        ax.set_title(model_name + "Clusters, First Two PCA Components")
         ax.set_xlabel("PCA Component 2")
         ax.set_ylabel("PCA Component 1")
         plt.show()
 
-    '''
-        Build Dendrogram for Hierarchical
-    '''
-    def build_dendrogram(self, X):
-        sch.dendrogram(sch.linkage(X, method='ward'))
-        plt.title('Dendrogram')
-        plt.xlabel('Data Point')
-        plt.ylabel('Euclidean Distances')
-        plt.show()
-
-    '''
-        Plot PCA components (or dendrogram for hierarchical)
-        Check distribution of CANDIDATE points in clusters
-    '''
-    def model_evaluation(self, X, y, cluster_labels, model_name, plot_flag):
-        # Plot
-        if (plot_flag):
-            if (model_name == "hierarchical"):
-                self.build_dendrogram(X)
-            else:
-                self.plot_pca(X, y, cluster_labels)
-        # Assess candidate distribution
-        self.assess_candidate_points(X, y, cluster_labels, model_name)
-
-
 class ClusterModels:
+    def __init__(self):
+        print("init")
     #dbscan model scaled data: X
-    def dbscan_model(X):
+    def dbscan_model(self, X):
         ep = 0.5
         min_samples = 6
         # Compute DBSCAN
@@ -153,7 +132,7 @@ class ClusterModels:
         print("Silhouette Coefficient: %0.3f" % sc)
         return cluster_labels, sc
 
-    def kmeans_model(X, plot_label):
+    def kmeans_model(self, X, plot_label):
         # set parameters
         kmeans_kwargs = {
             'init': "random",
@@ -223,7 +202,7 @@ class ClusterModels:
         return k_labels, max(silhouette_coefficients)
 
     # Create clustering, check silhouette scores
-    def hierarchical(X, plot_label):
+    def hierarchical(self, X, plot_label):
         flag = True
         sils = []
         cluster = 6
@@ -242,6 +221,7 @@ class ClusterModels:
         clusters = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
         #sil_clusters = plt.plot(clusters, sils)
         if plot_label:
+            sil_clusters = plt.plot(clusters, sils)
             plt.title('Silhouette Scores')
             plt.xlabel('Number of Clusters')
             plt.ylabel('Score')
@@ -254,10 +234,21 @@ class ClusterModels:
         hc = AgglomerativeClustering(n_clusters=cluster, affinity='euclidean', linkage='ward')
         hier_labels = hc.fit_predict(X)
 
+        self.build_dendrogram(X)
         #print(cluster, min(hier_labels))
         return hier_labels, max(sils)
 
-    def gmm_model(X, plot_label):
+    '''
+        Build Dendrogram for Hierarchical
+    '''
+    def build_dendrogram(self, X):
+        sch.dendrogram(sch.linkage(X, method='ward'))
+        plt.title('Dendrogram')
+        plt.xlabel('Data Point')
+        plt.ylabel('Euclidean Distances')
+        plt.show()
+
+    def gmm_model(self, X, plot_label):
         # Determining number of components using BIC
         lowest_bic = np.infty
         bic = []
@@ -279,8 +270,8 @@ class ClusterModels:
         knee = kl.elbow
         print('knee', knee)
 
-        minVal = min(bic[:]);
-        maxVal = max(bic[:]);
+        minVal = min(bic[:])
+        maxVal = max(bic[:])
         bic_norm = (bic- minVal) / (maxVal - minVal)
         #bic_norm = [float(i)/max(bic) for i in bic]
         bic = np.array(bic)
@@ -307,6 +298,7 @@ class ClusterModels:
             plt.text(xpos, bic.min() * 0.97 + .03 * bic.max(), '*', fontsize=14)
             spl.set_xlabel('Number of components')
             spl.legend([b[0] for b in bars], cv_types)
+            plt.show()
         else:
             pass
         # Select 2 as the number of components and build final GMM model
@@ -329,6 +321,26 @@ class ClusterModels:
         print(bic_norm[knee-1])
 
         return labels_cluster_gmm, bic_norm[knee-1]
+
+    def plot_gmm(self, exo_data):
+        # Loop through GMM 1->10 times to get ideal number of clusters
+        aic_vec = []
+        bic_vec = []
+        x_vec = []
+        for i in range(10):
+            probs, cur_aic, cur_bic = self.gmm_model(exo_data,i+1)
+            aic_vec.append(cur_aic)
+            bic_vec.append(cur_bic)
+            x_vec.append(i)
+        
+        # Plot the AIC/BIC scores from each of the models with N # of clusters
+        plt.plot(x_vec, aic_vec, 'r',label='AIC')
+        plt.plot(x_vec, bic_vec, 'b',label='BIC')
+        plt.legend()
+        plt.title('AIC/BIC - 10 Feature Selection')
+        plt.xlabel('# of Clusters')
+        plt.ylabel('AIC/BIC Score')
+        plt.show()
 
 
 

@@ -11,7 +11,7 @@ from sklearn.metrics import accuracy_score, classification_report
 from sklearn import metrics
 
 def load_data():
-    clustered_5 = pd.read_csv(r"../../data/exoplanet_cleanedrf_top_5.csv").to_numpy()
+    clustered_5 = pd.read_csv(r"../../data/dbscan_clustered_top_5.csv").to_numpy()
     # Get Labels
     labels = clustered_5[:, 0]
     # Delete Labels from data
@@ -29,15 +29,13 @@ def dec_tree(X, y):
 
     tree_params = {'criterion':['gini','entropy']}
 
-    clf = GridSearchCV(DecisionTreeClassifier(), tree_params, cv=10, n_jobs=-1)
+    clf = DecisionTreeClassifier(random_state=0)
     clf.fit(X, y)
     print(clf.cv_results_)
 
-    '''fig = plt.figure(figsize=(25,20))
-    _ = tree.plot_tree(clf, 
-                   feature_names=["koi_fpflag_co","koi_fpflag_nt","koi_fpflag_ss","koi_fpflag_ec","koi_prad", "cluster"],  
-                   class_names=["koi_pdisposition"],
-                   filled=True)'''
+    conf_matrix = metrics.plot_confusion_matrix(clf, X, y,
+                                 cmap=plt.cm.Blues)
+    plt.show()
 
 def test_score(clf):
     pass
