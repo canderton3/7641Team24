@@ -60,6 +60,8 @@ Interestingly, four of the top five most important features were the binary vari
 
 # Methods
 ## Unsupervised
+MICAELA - BLURB
+
 ### K-means
 K-means is a clustering algorithm that groups points around a selected K number of centroids. K-means requires a predetermined value of K. The K-means algorithim iteratively assigns data points to the nearest centroid, then moves the centroid assignment to the average of the points assigned to it. This process continues until the algorithim converges. 
 
@@ -84,7 +86,15 @@ Density-Based Spatial Clustering of Applications with Noise (DBSCAN) is a non-pa
 
 We implemented DBSCAN using Python's scikit-learn (sklearn) library, which has a built-in DBSCAN function in its cluster package. We scaled all of the non-binary data with the sklearn StandardScaler function before passing the features into the DBSCAN model. Because clustering algorithms are unsupervised, we did not feed the labels into the model. The most significant contribution we made in the creation of the DBSCAN model was parameter tuning, modifying both the acceptable &epsilon; distance and the minimum number of data points in each cluster. Then, we determined the distribution of CANDIDATE exoplanets to FALSE POSITIVES in each cluster, which we have the luxury of doing since we have labeled data. Further discussion of the results are below.
 
-# Results
+## Supervised
+
+### Decision Trees - Darby
+
+### Logistic Regression - Chase
+
+### Naive Bayes - Sam
+
+# Results - Clustering
 For each cluster, we used the labels from the dataset to discover the distribution of CANDIDATE and FALSE POSITIVE objects in each cluster. We calculate the percent of CANDIDATE objects in the cluster by dividing the number of CANDIDATES by the total number of objects in the cluster. To plot the clusters, we unfortunately cannot effectively visualize up to 10 dimensions; because of this issue, we chose to plot the first two principal components. We used principal component analysis (PCA) to determine the top two features that describe most of the variance in the model. In the plots, different colors denote different clusters, and star shapes denote CANDIDATE objects. We did attempt to use 3D plots to more effectively visualize the clusters but found that it was not exceedingly useful information.
 
 ## K-means
@@ -553,6 +563,15 @@ The plot visualizing the clusters and their distribution is below. It looks rema
 
 The silhouette coefficient for the 5 feature model is much higher than the 10 feature model, which we hypothesize is attributed to the lower amount of outliers, and more even distribution of FALSE POSITIVE objects.
 
+# Results - Classification
+DARBY - talk about choosing dbscan 5 features
+
+## Decision Trees
+
+## Logistic Regression
+
+## Naive Bayes
+
 # Discussion
 ## What We've Learned About the Data
 As we've seen from our clustering results, most of the clustering algorithms converged on a solution that ended up with one cluster holding almost all of the candidate points, then one or two clusters holding a much smaller amount. We found this very interesting so decided to look into the makeup of the objects that were apart of those two clusters. We will use the DBSCAN model run on the 5 feature dataset as an example. For this model, clusters 0 and 1 hold all (or almost all) of the candidate points in the dataset. A table with statistics for these two clusters is below.
@@ -564,8 +583,16 @@ As we've seen from our clustering results, most of the clustering algorithms con
 
 Interestingly enough, for cluster 0, all of the binary flags were also 0. For cluster 1, koi_fpflag_ss was equal to 1. There is also a significant difference between the koi_prad values. These are important statistics to be aware of because they paint a clearer picture on how NASA actually classifies exoplanets, without us ever needing to know the specific astronomical requirements. 
 
-## Steps Moving Forward
+## What Models We Chose and Why - MICAELA
+
+
+
+## Steps Moving Forward - REMOVE EVENTUALLY
 Now that we have implemented the unsupervised learning section of our project (techincally twice since we implemented random forest for feature selection), we can start working on the supervised learning portion. We believe that our clustering results can help us with further classification. The current plan is to use the cluster that the data point belongs to as its label. Due to the distribution of CANDIDATE data points and FALSE POSITIVE data points in the clusters determined above, the cluster label seems to be a relevant indicator of whether a data point is a CANDIDATE or FALSE POSITIVE. However, we have not decided on a specific clustering algorithm to move forward with because they are all so similar. We will evaluate these methods further when implementing our supervised methods because then we will see if we have significantly overfit or not. In the end, we could end up using an amalgamation of the clusters that we have found, and using our clustering methods more as guides than hard labels.
 
 We are in the process of evaluating supervised algorithms such as decision trees and logistic regression to further our solution. A full flow chart with our plan is below.
  ![](images/exoplanet.png)
+ 
+ 
+ # Conclusion
+ OVERALL DELIVERABLE
