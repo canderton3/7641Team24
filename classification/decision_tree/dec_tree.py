@@ -5,6 +5,7 @@ from mpl_toolkits.mplot3d import Axes3D
 from sklearn import tree
 
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score, classification_report
@@ -27,9 +28,8 @@ def dec_tree(X, y):
     # Recombine
     X = np.concatenate((binary_vars, scaled_numeric), axis = 1)
 
-    tree_params = {'criterion':['gini','entropy']}
-
-    clf = DecisionTreeClassifier(random_state=0)
+    #clf = DecisionTreeClassifier(random_state=0)
+    clf = GradientBoostingClassifier(random_state=0)
     clf.fit(X, y)
     print(clf.cv_results_)
 
