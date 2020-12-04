@@ -568,17 +568,34 @@ The plot visualizing the clusters and their distribution is below. It looks rema
 The silhouette coefficient for the 5 feature model is much higher than the 10 feature model, which we hypothesize is attributed to the lower amount of outliers, and more even distribution of FALSE POSITIVE objects.
 
 # Results - Classification
-After performing all of our clustering algorithms, we needed to determine which clustering algorithm's labels to move forward with, as well as decide the number of features to include. The CANDIDATE points in K-means and hierarchical clustering are more evenly distributed over multiple clusters compared to the more contained results of DBSCAN. Because the CANDIDATE points are centralized in only two clusters in DBSCAN, the cluster label will likely be more meaningful in the classification process, and does not seem to be at risk for overfitting. Thus, for all of the classification methods implemented, we will be using a dataset including the top five most important features and the cluster label for the data point. Also, to ensure that the models were being assessed equally, we used the same train/test data split for each model. 25% of the data was reserved for testing, while the other 75% was used for training. 
+After performing all of our clustering algorithms, we needed to determine which clustering algorithm's labels to move forward with, as well as decide the number of features to include. The CANDIDATE points in K-means and hierarchical clustering are more evenly distributed over multiple clusters compared to the more contained results of DBSCAN. Because the CANDIDATE points are centralized in only two clusters in DBSCAN, the cluster label will likely be more meaningful in the classification process, and does not seem to be at risk for overfitting. Thus, for all of the classification methods implemented, we will be using a dataset including the top five most important features and the cluster label for the data point. Also, to ensure that the models were being assessed equally, we used the same train/test data split for each model. 25% of the data was reserved for testing, while the other 75% was used for training.
 
 ## Decision Trees
 Because we implemented two ensemble decision tree algorithms, we will address their results separately. For both GradientBoostingClassifier and XGBoost, the best parameter combination detected by grid search was a learning rate equal to 0.01, and 100 boosting stages. Their final results were also essentially equivalent. 
 
 ### GradientBoostingClassifier
-The confusion matrix with the results of GradientBoostingClassifier's predictions for the test set are below.
+The confusion matrix with the results of GradientBoostingClassifier's predictions for the test set is below. 
 ![](images/gbc_confusion_matrix.png)
 
+The model performs extremely well on the test set. Nearly all of the data points were classified correctly, excluding only eight. 
+
+**Accuracy:** 99%
+**Precision:** 100%
+**Recall:**  99%
+**Sensitivity:** 99%
+**Specificity:** 100%
+
 ### XGBoost
+The confusion matrix with the results of XGBoost's predictions for the test set is below. 
 ![](images/xgb_confusion_matrix.png)
+
+The model performs extremely well on the test set. Nearly all of the data points were classified correctly, also excluding only eight like the GradientBoostingClassifier
+
+**Accuracy:** 99%
+**Precision:** 100%
+**Recall:**  99%
+**Sensitivity:** 99%
+**Specificity:** 100%
 
 ## Logistic Regression
 ![](images/log_reg_confusion_matrix.png)
@@ -587,7 +604,7 @@ The confusion matrix with the results of GradientBoostingClassifier's prediction
 ![](images/nb_confusion_matrix.png)
 
 # Discussion
-## What We've Learned About the Data
+## Clustering Results: What We've Learned About the Data
 As we've seen from our clustering results, most of the clustering algorithms converged on a solution that ended up with one cluster holding almost all of the candidate points, then one or two clusters holding a much smaller amount. We found this very interesting so decided to look into the makeup of the objects that were apart of those two clusters. We will use the DBSCAN model run on the 5 feature dataset as an example. For this model, clusters 0 and 1 hold all (or almost all) of the candidate points in the dataset. A table with statistics for these two clusters is below.
 
 | Cluster | Average koi_fpflag_co Value | Average koi_fpflag_nt Value | Average koi_fpflag_ss Value | Average koi_fpflag_ec Value | Average koi_prad Value |
@@ -599,15 +616,14 @@ Interestingly enough, for cluster 0, all of the binary flags were equal to 0. Fo
 
 ## What Models We Chose and Why - MICAELA
 
-
-| Metric | GradientBoostingClassifier | XGBoost | Logistic Regression | Naive Bayes |
+| Metric (%) | GradientBoostingClassifier | XGBoost | Logistic Regression | Naive Bayes |
 |---|---|---|---|---|
 | Accuracy | 0 | 0 | 0 | 0 |
 | Recall | 0 | 0 | 1 | 0 |
 | Precision | 0 | 0 | 1 | 0 |
 | Sensitivity | 0 | 0 | 1 | 0 |
 
-insert prioritize recall even though it doesn't really apply to our models bc confusion matrices
+insert wanting to minimize false negatives
 
 ## Impact of Using Clustering?
 
