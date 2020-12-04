@@ -85,6 +85,9 @@ if __name__ == "__main__":
 
     gcb = GradientBoostingClassifier(learning_rate=0.01, n_estimators=100)
     gcb.fit(X_train, y_train)
+    gcb_preds = gcb.predict(X_test)
+
+    print(classification_report(y_test, gcb_preds))
     conf_matrix_xgb = metrics.plot_confusion_matrix(gcb, X_test, y_test, cmap=plt.cm.Blues)
     conf_matrix_xgb.ax_.set_title("Gradient Boosted Classifier Confusion Matrix")
 
@@ -113,6 +116,10 @@ if __name__ == "__main__":
 
     xgb = XGBClassifier(learning_rate=0.01, n_estimators=100)
     xgb.fit(X_train, y_train)
+    xgb_preds = xgb.predict(X_test)
+
+    print(classification_report(y_test, xgb_preds))
+
     conf_matrix_xgb = metrics.plot_confusion_matrix(xgb, X_test, y_test, cmap=plt.cm.Blues)
     conf_matrix_xgb.ax_.set_title("XGBoost Confusion Matrix")
 

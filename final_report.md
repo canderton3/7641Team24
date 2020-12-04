@@ -217,7 +217,7 @@ The model performed worse for where K = 2 but performed near perfectly where K=1
 		<td colspan="4"><img src="images/siltop5.png"></td>
 	</tr>
 	<tr>
-		<td colspan="4"><img src="images/silpoltyop10.png"></td>
+		<td colspan="4"><img src="images/silplottop10.png"></td>
 		<td colspan="4"><img src="images/silplottop5.png"></td>
 	</tr>
 	<tr>
@@ -580,22 +580,37 @@ The confusion matrix with the results of GradientBoostingClassifier's prediction
 The model performs extremely well on the test set. Nearly all of the data points were classified correctly, excluding only eight. 
 
 **Accuracy:** 99%
+
 **Precision:** 100%
+
 **Recall:**  99%
+
 **Sensitivity:** 99%
+
 **Specificity:** 100%
+
+**F1 Score:** 1
 
 ### XGBoost
 The confusion matrix with the results of XGBoost's predictions for the test set is below. 
 ![](images/xgb_confusion_matrix.png)
 
-The model performs extremely well on the test set. Nearly all of the data points were classified correctly, also excluding only eight like the GradientBoostingClassifier
+By our observations, the model performs extremely well on the test set. Nearly all of the data points were classified correctly, also excluding only eight samples like the GradientBoostingClassifier.
 
 **Accuracy:** 99%
+
 **Precision:** 100%
+
 **Recall:**  99%
+
 **Sensitivity:** 99%
+
 **Specificity:** 100%
+
+**F1 Score:** 1
+
+The model performances for both of the gradient boosted decision trees are basically the same, for every measurement. This is most likely due to the similarity in their gradient boosting algorithms under the hood. Also, there may not be enough data points for XGBoost's regularization to make much of a difference. 
+
 
 ## Logistic Regression
 ![](images/log_reg_confusion_matrix.png)
@@ -605,7 +620,7 @@ The model performs extremely well on the test set. Nearly all of the data points
 
 # Discussion
 ## Clustering Results: What We've Learned About the Data
-As we've seen from our clustering results, most of the clustering algorithms converged on a solution that ended up with one cluster holding almost all of the candidate points, then one or two clusters holding a much smaller amount. We found this very interesting so decided to look into the makeup of the objects that were apart of those two clusters. We will use the DBSCAN model run on the 5 feature dataset as an example. For this model, clusters 0 and 1 hold all (or almost all) of the candidate points in the dataset. A table with statistics for these two clusters is below.
+As we've seen from our clustering results, most of the clustering algorithms converged on a solution that ended up with one cluster holding almost all of the candidate points, then one or two clusters holding a much smaller amount. We found this very interesting so decided to look into the makeup of the objects that were apart of those two clusters. We will use the DBSCAN model run on the 5 feature dataset as an example, as that is the algorithm and subsequent data that we chose to move forward with. For this model, clusters 0 and 1 hold all (or almost all) of the candidate points in the dataset. A table with statistics for these two clusters is below.
 
 | Cluster | Average koi_fpflag_co Value | Average koi_fpflag_nt Value | Average koi_fpflag_ss Value | Average koi_fpflag_ec Value | Average koi_prad Value |
 |---|---|---|---|---|---|
@@ -614,18 +629,18 @@ As we've seen from our clustering results, most of the clustering algorithms con
 
 Interestingly enough, for cluster 0, all of the binary flags were equal to 0. For cluster 1, koi_fpflag_ss was equal to 1. There is also a significant difference between the koi_prad values. These are important statistics to be aware of because they paint a clearer picture on how NASA actually classifies exoplanets, without us ever needing to know the specific astronomical requirements. 
 
-## What Models We Chose and Why - MICAELA
+## Comparing Classification Results - MICAELA
 
-| Metric (%) | GradientBoostingClassifier | XGBoost | Logistic Regression | Naive Bayes |
+| Metric | GradientBoostingClassifier | XGBoost | Logistic Regression | Naive Bayes |
 |---|---|---|---|---|
-| Accuracy | 0 | 0 | 0 | 0 |
-| Recall | 0 | 0 | 1 | 0 |
-| Precision | 0 | 0 | 1 | 0 |
-| Sensitivity | 0 | 0 | 1 | 0 |
+| Accuracy | 99% | 99% | 0 | 0 |
+| Recall | 100% | 100% | 1 | 0 |
+| Precision | 99% | 99% | 1 | 0 |
+| Sensitivity | 99% | 99% | 1 | 0 |
+| Specificity | 100% | 100% | 1 | 0 |
+| F1 Score | 1 | 1 | 0 | 0 |
 
 insert wanting to minimize false negatives
-
-## Impact of Using Clustering?
 
 
 ## Steps Moving Forward - REMOVE EVENTUALLY
