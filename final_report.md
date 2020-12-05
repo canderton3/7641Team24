@@ -2,28 +2,28 @@
 ## Chase Anderton, Darby Cobb, Micaela Siraj, Sam Weber
 
 # Introduction/Background
-NASA built and launched the Kepler Space Observatory satellite in 2009. The primary objective of the telescope was to find other planets outside of our solar system, known as exoplanets; to do this, Kepler collects data on "objects of interest" that could be classified as exoplanets based on certain characteristics. Despite some mechanical failures, Kepler is still active and continues to gather data on possible planets outside of our solar system. By discovering new exoplanets in our galaxy, we can continue humanity's search for life on other planets and possible habitable zones.
+NASA built and launched the Kepler Space Observatory satellite in 2009. The primary objective of the telescope was to find other planets outside of our solar system, known as exoplanets; to do this, Kepler collects data on "objects of interest" that could be classified as exoplanets based on certain characteristics. Despite some mechanical failures, Kepler is still active and continues to gather data on possible planets outside of our solar system. By discovering new exoplanets outside our solar system, we can continue humanity's search for life on other planets and possible habitable zones.
 
-# Problem definition
-Using the data that Kepler has collected, NASA is trying to classify exoplanets as candidates for habitation, or as false positives. As there are a nearly infinite number of “objects of interest” in the galaxy let alone, the universe, the amount of time to classify these objects of interest as probable habitable planets versus non-habitable would be too costly and time-intensive for humans to do. Therefore, we are creating a machine learning model to predict/classify whether an object of interest detected by Kepler is a candidate to be classified as a planet, to reduce labor costs and human effort. In the process of creating this model, we can also discover key characteristics that Kepler measures that are indicative of an exoplanet, which could eventually narrow our search even further and make it less computationally expensive to identify exoplanets.
+# Problem Definition
+Using the data that Kepler has collected, NASA's goal is to classify exoplanets as candidates for habitation, or as false positives. As there are a nearly infinite number of “objects of interest” in the galaxy, let alone the universe, the amount of time to classify these objects of interest as probable habitable planets versus non-habitable would be too costly and time-intensive for humans to do. In order to aid their efforts, we are creating a machine learning model to predict/classify whether an object of interest detected by Kepler is a candidate to be classified as a planet, to reduce labor costs and human effort. In the process of creating this model, we can also discover key characteristics that Kepler measures that are indicative of an exoplanet, which could eventually narrow our search even further and make it less computationally expensive to identify exoplanets.
 
 # Data Collection
 ## Exoplanet Dataset
 The dataset was sourced from Kaggle, linked [here](https://www.kaggle.com/nasa/kepler-exoplanet-search-results), sourced directly from NASA. The dataset is a record of all of the "objects of interest" that Kepler has collected data on. The inital size was 3.52 MB, with 50 columns and around 10,000 data points. Each data point contains information about physical characteristics of already classified objects identified by Kepler; the data point also has a label (koi_pdisposition) designating it as either a CANDIDATE or a FALSE POSITVE. Our goal is to identify CANDIDATE planets.
 
-Thankfully the dataset came with a thorough data dictionary, linked [here](https://exoplanetarchive.ipac.caltech.edu/docs/API_kepcandidate_columns.html). Our goal was to use the possible exoplanet's physical characteristics to identify the object of interest as either a candidate or false positive, so we we focused mostly on the physical characteristics columns. More information about feature selection is below.
+A thorough data dictionary accompanied the dataset, linked [here](https://exoplanetarchive.ipac.caltech.edu/docs/API_kepcandidate_columns.html). Our goal was to use the possible exoplanet's physical characteristics to identify the object of interest as either a candidate or false positive, so we we focused mostly on the physical characteristics columns described in the data dictionary. More information about feature selection is below.
 
 ## Data Cleaning and Preparation
-This dataset was relatively easy to clean-there was no aggregation to be done or significant issues to handle. The main issues were NaN values and feature selection.
+This dataset was relatively easy to clean - there was no aggregation to be done or significant issues to handle. The main issues were NaN values and finding the most useful features.
 
 ### Cleaning
-Before dropping any columns, 36 columns contained at least some NaN values. This obviously was not going to be helpful for our purposes, but we didn't necessarily want to just drop all 36 columns. We first removed essentially all columns that weren't physical characteristics of the object of interest, excepting the label koi_pdisposition. This includes the exoplanet's id and name(s).
+72% of the columns contained at least some NaN values. We didn't necessarily want to just drop all 36 columns, but NaN values would not be feasible for our methods. We first removed essentially all columns that weren't physical characteristics of the object of interest, excepting the label koi_pdisposition. This includes removing the exoplanet's id and name(s).
 
 **Note:** The columns koi_pdispostion and koi_disposition are very similar. koi_disposition values are "the category of this KOI from the Exoplanet Archive", which includes CONFIRMED planets that have been verified manually by NASA. koi_pdisposition values are "the pipeline flag that designates the most probable physical explanation of the KOI". koi_pdisposition is therefore a better fit for our purposes, because we want to decrease the manual labor of NASA to identify candidate exoplanets and thus want to rely on the physical explanations rather than whether the object of interest is CONFIRMED in the Exoplanet Archive.
 
-After dropping the categorical columns, we still had the NaN problem. There were two columns, koi_teq_err1 and koi_teq_err2 that had no values for any data points, so those were dropped. Then, we reached a spot in our data cleaning process where some decisions had to be made. Most of the continuous columns had err1 and err2 values, which were essentially the confidence interval range for the actual value measured for the column. For example, if koi_depth was 2, err1 could be 1, and err2 could be -0.5, telling us that the actual bounds for koi_depth were between [1.5, 3]. We considered having different columns for upper and lower bounds, but didn't see that the information added by that would be exceedingly helpful. Because of this we chose to essentially ignore all of the error columns and keep the measured values. After doing this, we removed the data points that still contained NaN values. We decided to not impute the missing values due to the variation between the physical characteristics of all of the data points.
+After dropping the categorical columns, NaNs were still prevalent. There were two columns, koi_teq_err1 and koi_teq_err2 that had no values for any data points, so they were both dropped. Most of the continuous features had err1 and err2 values, which helped define the confidence interval range for the actual value measured for the column. For example, if koi_depth was 2, and err1 was equal to 1, and err2 was equal to -0.5, indicating that the actual bounds for koi_depth were between [1.5, 3]. We considered keeping different columns for upper and lower bounds, or keeping the value of the range somehow in the data but didn't see any extra benefit gained from that information. Because of this we chose to remove the error columns and keep the measured values. After doing this, we removed the data points that still contained NaN values. We decided to not impute the missing values due to the variation between the physical characteristics of all of the data points.
 
-Cleaning the data of NaN values and unnecessary columns reduced our dataset to 22 columns and nearly 8000 data points. We are confident that 8000 data points is enough for a successful and generalized classification model.
+Cleaning the data of NaN values and unnecessary columns reduced our dataset to 22 columns and nearly 8000 data points. We are confident that 8000 data points is enough for a successful and relatively generalized classification model.
 
 **Note:** The feature koi_score was not removed during the cleaning process, but we chose to not include it in our final list of features. The definition of this 
 feature is "a value between 0 and 1 that indicates the confidence in the KOI disposition. For CANDIDATEs, a higher value indicates more confidence in its disposition, while for FALSE POSITIVEs, a higher value indicates less confidence in that disposition. The value is calculated from a Monte Carlo technique such that the score's value is equivalent to the frction of iterations where the Robovetter yields a disposition of CANDIDATE." Thus, the koi_score is directly linked to the koi_pdisposition of the data point, our target variable, using complex mathematical methods. Because of this direct correlation, and the fact that it is not a physical characteristc of the exoplanet, we have chosen to disregard it from consideration for features.
@@ -89,7 +89,7 @@ We implemented DBSCAN using Python's scikit-learn (sklearn) library, which has a
 ## Supervised
 
 ### Gradient Decision Trees
-Decision trees are one example of a supervised classification approach, utilizing a tree-like model to make decisions. Leaves of the tree represent the class labels while the branches are the 'decisions' or 'splits' of the features in order to get to the most accurate leaf. Gradient boosting can improve the performance of decision trees; it combines "weak" methods such as decision trees into ensembles. Trees are added one by one, to minimize the gradient boost loss function so each new tree has a better quality of fit than the previous tree. 
+Decision trees are one example of a supervised classification approach, utilizing a tree-like model to make decisions. Leaves of the tree represent the class labels while the branches are the 'decisions' or 'splits' of the features in order to get to the most accurate leaf. Gradient boosting can improve the performance of decision trees; it combines "weak" methods such as decision trees into ensembles. Trees are added one by one, to minimize the gradient boost loss function so each new tree has a better quality of fit than the previous tree.
 
 The main parameters to tune for this model are the learning rate and number of boosting stages to perform (the number of estimators). There are tradeoffs between these parameters; the learning rate can increase or decrease the "contribution" of each tree, so a larger learning rate value performing well may correspond to actually needing more estimators. We optimized these parameters using grid search with 10-fold cross validation to find the best combination. 
 
@@ -568,17 +568,15 @@ The plot visualizing the clusters and their distribution is below. It looks rema
 The silhouette coefficient for the 5 feature model is much higher than the 10 feature model, which we hypothesize is attributed to the lower amount of outliers, and more even distribution of FALSE POSITIVE objects.
 
 # Results - Classification
-After performing all of our clustering algorithms, we needed to determine which clustering algorithm's labels to move forward with, as well as decide the number of features to include. The CANDIDATE points in K-means and hierarchical clustering are more evenly distributed over multiple clusters compared to the more contained results of DBSCAN. Because the CANDIDATE points are centralized in only two clusters in DBSCAN, the cluster label will likely be more meaningful in the classification process, and does not seem to be at risk for overfitting. Thus, for all of the classification methods implemented, we will be using a dataset including the top five most important features and the cluster label for the data point. Also, to ensure that the models were being assessed equally, we used the same train/test data split for each model. 25% of the data was reserved for testing, while the other 75% was used for training.
+After performing all of our clustering algorithms, we needed to determine which clustering algorithm's labels to move forward with, as well as decide the number of features to include. The CANDIDATE points in K-means and hierarchical clustering are more evenly distributed over multiple clusters compared to the more contained results of DBSCAN. Because the CANDIDATE points are centralized in only two clusters in DBSCAN, the cluster label will likely be more meaningful in the classification process, and does not seem to be at risk for overfitting. Thus, for all of the classification methods implemented, the input was a dataset including the top five most important features and the DBSCAN cluster label for the data point. Also, to ensure that the models were being assessed equally, we used the same train/test data split for each model. 25% of the data was reserved for testing, while the other 75% was used for training.
 
 ## Decision Trees
-Because we implemented two ensemble decision tree algorithms, we will address their results separately. For both GradientBoostingClassifier and XGBoost, the best parameter combination detected by grid search was a learning rate equal to 0.01, and 100 boosting stages. Their final results were also essentially equivalent. 
+Because we implemented two ensemble decision tree algorithms, we will address their results separately. For both GradientBoostingClassifier and XGBoost, the best parameter combination detected by grid search was a learning rate equal to 0.01, and 100 boosting stages. The model performances for both of the gradient boosted decision trees are essentially equivalent, for every measurement. This is most likely due to the similarity in their gradient boosting algorithms under the hood. There also may not be enough data points for XGBoost's regularization to make much of a difference.
 
 ### GradientBoostingClassifier
 The confusion matrix with the results of GradientBoostingClassifier's predictions for the test set is below. 
 ![](images/gbc_confusion_matrix.png)
 
-The model performs extremely well on the test set. Nearly all of the data points were classified correctly, excluding only eight. 
-
 **Accuracy:** 99%
 
 **Precision:** 100%
@@ -590,13 +588,13 @@ The model performs extremely well on the test set. Nearly all of the data points
 **Specificity:** 100%
 
 **F1 Score:** 1
+
+The model performs extremely well on the test set. Nearly all of the data points were classified correctly, excluding only eight. Unfortunately, the eight data points that are misclassified are false negatives, meaning that they are actually CANDIDATE points that were classified as FALSE POSITIVES. This is not an ideal scenario, because it indicates that our model would miss actual exoplanets. However, the false negatives constitute less than 0.01% of the test CANDIDATE population, which is an acceptable percentage. Overall, we would be confident using this model, and it is more robust than regular decision trees.
 
 ### XGBoost
 The confusion matrix with the results of XGBoost's predictions for the test set is below. 
 ![](images/xgb_confusion_matrix.png)
 
-By our observations, the model performs extremely well on the test set. Nearly all of the data points were classified correctly, also excluding only eight samples like the GradientBoostingClassifier.
-
 **Accuracy:** 99%
 
 **Precision:** 100%
@@ -609,8 +607,7 @@ By our observations, the model performs extremely well on the test set. Nearly a
 
 **F1 Score:** 1
 
-The model performances for both of the gradient boosted decision trees are basically the same, for every measurement. This is most likely due to the similarity in their gradient boosting algorithms under the hood. Also, there may not be enough data points for XGBoost's regularization to make much of a difference. 
-
+By our observations, the model performs extremely well on the test set. Nearly all of the data points were classified correctly, also excluding only eight samples like the GradientBoostingClassifier. Once again, the eight data points misclassified are false negatives; the issues of which were addressed above. Like the GradientBoostingClassifier, we would be confident implementing this model as a part of our ML design pipeline. We would probably lean towards choosing XGBoost between the two for long term maintenance. If we were to rerun our models with a larger dataset, XGBoost would be more equipped to handle the larger dataset due to its optimization techniques under the hood.
 
 ## Logistic Regression
 ![](images/log_reg_confusion_matrix.png)
@@ -640,7 +637,7 @@ Interestingly enough, for cluster 0, all of the binary flags were equal to 0. Fo
 | Specificity | 100% | 100% | 1 | 0 |
 | F1 Score | 1 | 1 | 0 | 0 |
 
-insert wanting to minimize false negatives
+Ideally, there would be minimal false negatives, because we don't want to miss any possible CANDIDATE planets. Because all of our models blah blah 
 
 
 ## Steps Moving Forward - REMOVE EVENTUALLY
@@ -652,3 +649,4 @@ We are in the process of evaluating supervised algorithms such as decision trees
  
  # Conclusion
  OVERALL DELIVERABLE
+ Rerunning with enough new data?
