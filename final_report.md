@@ -97,7 +97,12 @@ There are two main packages that we used to implement gradient boosted trees. Th
 
 ### Logistic Regression - Chase
 
-### Naive Bayes - Sam
+### Naive Bayes
+Another classification approach we implemented was Naive Bayes. This approach is based on an application of Bayes’ Theorem, with the important assumption that dimensions are independent from one another. Since it is a generative model, we are explicitly modeling likelihood and priors in order to calculate posterior probabilities, and since we have an assumption of independent features, our equation simply becomes the prior probability multiplied by the product of all the features. Data points can then be classified based on which response case produces the larger posterior numerator.
+
+Our implementation, specifically, utilizes a Gaussian Naive Bayes algorithm, which assumes that the likelihood of the features follows a Gaussian distribution. Other popular variations include Multinomial Naive Bayes, Complement Naive Bayes and Bernoulli Naive Bayes.
+
+To implement this in Python, we utilized sklearn’s GaussianNB package, in which we fit a model to our training data, and predicted results using our test data. For more details of the results of this analysis, please see below. 
 
 # Results - Clustering
 For each cluster, we used the labels from the dataset to discover the distribution of CANDIDATE and FALSE POSITIVE objects in each cluster. We calculate the percent of CANDIDATE objects in the cluster by dividing the number of CANDIDATES by the total number of objects in the cluster. To plot the clusters, we unfortunately cannot effectively visualize up to 10 dimensions; because of this issue, we chose to plot the first two principal components. We used principal component analysis (PCA) to determine the top two features that describe most of the variance in the model. In the plots, different colors denote different clusters, and star shapes denote CANDIDATE objects. We did attempt to use 3D plots to more effectively visualize the clusters but found that it was not exceedingly useful information.
