@@ -618,7 +618,22 @@ By our observations, the model performs extremely well on the test set. Nearly a
 ![](images/log_reg_confusion_matrix.png)
 
 ## Naive Bayes
+The confusion matrix for our Gaussian Naive Bayes model's predctions on the test set is below.
 ![](images/nb_confusion_matrix.png)
+
+**Accuracy:** 99%
+
+**Precision:** 100%
+
+**Recall:**  99%
+
+**Sensitivity:** 99%
+
+**Specificity:** 100%
+
+**F1 Score:** 1
+
+Using this implementation, it appears we receive identical results on the test set compared to both decision tree models. Like those models, we have only eight misclassifications, all of them being false negatives (they are CANDIDATE points that are wrongly classified as FALSE POSITIVES). Specific drawbacks were mentioned previously, that it's particularly disadvantageous to have these false negative misclassifications, since we may be missing actual exoplanets. Like the other models, though, these misclassifications constitute such a small proportion of the test CANDIDATE population that we could remain confident in the findings of this model. 
 
 # Discussion
 ## Clustering Results: What We've Learned About the Data
