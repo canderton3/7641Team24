@@ -7,6 +7,10 @@ NASA built and launched the Kepler Space Observatory satellite in 2009. The prim
 # Problem Definition
 Using the data that Kepler has collected, NASA's goal is to classify exoplanets as candidates for habitation, or as false positives. As there are a nearly infinite number of “objects of interest” in the galaxy, let alone the universe, the amount of time to classify these objects of interest as probable habitable planets versus non-habitable would be too costly and time-intensive for humans to do. In order to aid their efforts, we are creating a machine learning model to predict/classify whether an object of interest detected by Kepler is a candidate to be classified as a planet, to reduce labor costs and human effort. In the process of creating this model, we can also discover key characteristics that Kepler measures that are indicative of an exoplanet, which could eventually narrow our search even further and make it less computationally expensive to identify exoplanets.
 
+Our plan for the model pipeline is below.
+
+![](images/exoplanet.png)
+
 # Data Collection
 ## Exoplanet Dataset
 The dataset was sourced from Kaggle, linked [here](https://www.kaggle.com/nasa/kepler-exoplanet-search-results), sourced directly from NASA. The dataset is a record of all of the "objects of interest" that Kepler has collected data on. The inital size was 3.52 MB, with 50 columns and around 10,000 data points. Each data point contains information about physical characteristics of already classified objects identified by Kepler; the data point also has a label (koi_pdisposition) designating it as either a CANDIDATE or a FALSE POSITVE. Our goal is to identify CANDIDATE planets.
@@ -650,12 +654,12 @@ Interestingly enough, for cluster 0, all of the binary flags were equal to 0. Fo
 
 | Metric | GradientBoostingClassifier | XGBoost | Logistic Regression | Naive Bayes |
 |---|---|---|---|---|
-| Accuracy | 99% | 99% | 0 | 0 |
-| Recall | 100% | 100% | 1 | 0 |
-| Precision | 99% | 99% | 1 | 0 |
-| Sensitivity | 99% | 99% | 1 | 0 |
-| Specificity | 100% | 100% | 1 | 0 |
-| F1 Score | 1 | 1 | 0 | 0 |
+| Accuracy | 99% | 99% | 0 | 99% |
+| Recall | 100% | 100% | 1 | 100% |
+| Precision | 99% | 99% | 1 | 99% |
+| Sensitivity | 99% | 99% | 1 | 99% |
+| Specificity | 100% | 100% | 1 | 100% |
+| F1 Score | 1 | 1 | 0 | 1 |
 
 Ideally, there would be minimal false negatives, because we don't want to miss any possible CANDIDATE planets. Because all of our models blah blah 
 
@@ -663,10 +667,6 @@ Ideally, there would be minimal false negatives, because we don't want to miss a
 ## Steps Moving Forward - REMOVE EVENTUALLY
 Now that we have implemented the unsupervised learning section of our project (techincally twice since we implemented random forest for feature selection), we can start working on the supervised learning portion. We believe that our clustering results can help us with further classification. The current plan is to use the cluster that the data point belongs to as its label. Due to the distribution of CANDIDATE data points and FALSE POSITIVE data points in the clusters determined above, the cluster label seems to be a relevant indicator of whether a data point is a CANDIDATE or FALSE POSITIVE. However, we have not decided on a specific clustering algorithm to move forward with because they are all so similar. We will evaluate these methods further when implementing our supervised methods because then we will see if we have significantly overfit or not. In the end, we could end up using an amalgamation of the clusters that we have found, and using our clustering methods more as guides than hard labels.
 
-We are in the process of evaluating supervised algorithms such as decision trees and logistic regression to further our solution. A full flow chart with our plan is below.
- ![](images/exoplanet.png)
- 
- 
  # Conclusion
  OVERALL DELIVERABLE
  Rerunning with enough new data?
