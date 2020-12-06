@@ -64,8 +64,6 @@ Interestingly, four of the top five most important features were the binary vari
 
 # Methods
 ## Unsupervised
-MICAELA - BLURB
-
 ### K-means
 K-means is a clustering algorithm that groups points around a selected K number of centroids. K-means requires a predetermined value of K. The K-means algorithim iteratively assigns data points to the nearest centroid, then moves the centroid assignment to the average of the points assigned to it. This process continues until the algorithim converges. 
 
