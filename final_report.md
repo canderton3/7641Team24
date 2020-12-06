@@ -619,6 +619,20 @@ By our observations, the model performs extremely well on the test set. Nearly a
 ## Logistic Regression
 ![](images/log_reg_confusion_matrix.png)
 
+**Accuracy:** 99%
+
+**Precision:** 100%
+
+**Recall:**  99%
+
+**Sensitivity:** 99%
+
+**Specificity:** 100%
+
+**F1 Score:** 1
+
+Logistic regression presented a paralling result to the other supervised models the team had worked to create. While accuracy and precision were particularly high categories of the logisitic regression model, however it still managed to score higher on the false negative criterion. As described previously in other categories, it is important to the tema that we have a lower ratio of false negatives versus false positives due to external economic and labor constraints. Logisitic regression typically performs quite well, significantly better than most unsupevised models, however in respect to supervised modelling it also scores "better." Since the team is looking for fewer false negatives the logistic regression model performed quite well.
+
 ## Naive Bayes
 The confusion matrix for our Gaussian Naive Bayes model's predctions on the test set is below.
 ![](images/nb_confusion_matrix.png)
