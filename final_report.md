@@ -650,23 +650,26 @@ As we've seen from our clustering results, most of the clustering algorithms con
 
 Interestingly enough, for cluster 0, all of the binary flags were equal to 0. For cluster 1, koi_fpflag_ss was equal to 1. There is also a significant difference between the koi_prad values. These are important statistics to be aware of because they paint a clearer picture on how NASA actually classifies exoplanets, without us ever needing to know the specific astronomical requirements. 
 
-## Comparing Classification Results - MICAELA
+## Comparing Classification Model Results
 
 | Metric | GradientBoostingClassifier | XGBoost | Logistic Regression | Naive Bayes |
 |---|---|---|---|---|
-| Accuracy | 99% | 99% | 0 | 99% |
-| Recall | 100% | 100% | 1 | 100% |
-| Precision | 99% | 99% | 1 | 99% |
-| Sensitivity | 99% | 99% | 1 | 99% |
-| Specificity | 100% | 100% | 1 | 100% |
-| F1 Score | 1 | 1 | 0 | 1 |
+| Accuracy | 99% | 99% | 99% | 99% |
+| Recall | 100% | 100% | 99% | 100% |
+| Precision | 99% | 99% | 100% | 99% |
+| Sensitivity | 99% | 99% | 99% | 99% |
+| Specificity | 100% | 100% | ~100% | 100% |
+| F1 Score | 1 | 1 | 0.99 | 1 |
 
-Ideally, there would be minimal false negatives, because we don't want to miss any possible CANDIDATE planets. Because all of our models blah blah 
+Ideally, there would be minimal false negatives, because we don't want to miss any possible CANDIDATE planets. As expected, all of our models predicted some false negatives, but they constituted less than 0.01% of the test set. By and large, the models performed extremely well and almost equivalent. Then, how do we choose which model to move forward with?
 
+GradientBoostingClassifier, XGBoost, and Naive Bayes are all hard classifiers, which by definition output the predicted class (CANDIDATE, FALSE POSITIVE), not the probability of the data point belonging to that class. Logistic Regression is a soft classifier, which outputs the probability that the data point belongs to the specific class. For the purposes of this project and the nature of scientific classification, a soft classifier most likely suits the needs of the problem more than a hard classifier. A soft classifier enables the planetary experts to set confidence thresholds for classification, which is preferable to just classifying an object as a CANDIDATE or FALSE POSITIVE with no nuance. Perhaps if we examined the misclassifications in Logistic Regression, the probabilities may indicate to experts that the data point requires more inspection for definitive classification.
 
-## Steps Moving Forward - REMOVE EVENTUALLY
-Now that we have implemented the unsupervised learning section of our project (techincally twice since we implemented random forest for feature selection), we can start working on the supervised learning portion. We believe that our clustering results can help us with further classification. The current plan is to use the cluster that the data point belongs to as its label. Due to the distribution of CANDIDATE data points and FALSE POSITIVE data points in the clusters determined above, the cluster label seems to be a relevant indicator of whether a data point is a CANDIDATE or FALSE POSITIVE. However, we have not decided on a specific clustering algorithm to move forward with because they are all so similar. We will evaluate these methods further when implementing our supervised methods because then we will see if we have significantly overfit or not. In the end, we could end up using an amalgamation of the clusters that we have found, and using our clustering methods more as guides than hard labels.
+Before starting this project, all team members were relatively unfamiliar with the details of classification models. With the knowledge we have gained in the class and in the course of this project, we now believe that the soft classification approach should have been our sole classification approach. There are many soft classification models that we did not implement for this project that may have been better suited to the problem. However, our hard classification models performed equivalently to Logistic Regression, so not much information has been lost between the two in the scope of this project.
 
- # Conclusion
- OVERALL DELIVERABLE
- Rerunning with enough new data?
+# Conclusion
+Our model design classified Kepler's objects of interest extremely well, with an accuracy of 99%. We tested four clustering models: K-Means, Gaussian Mixture Modeling, Hierarchical Clustering, and DBSCAN. DBSCAN provided the most holistic cluster labels while minimizing overfitting that may have been prevalent with the other models. The cluster labels based on the top 5 most important features identified by Random Forest. These in turn utilized as a feature for the classification models we tested. This is a similar process to some text classification methods, which was a key influence in our decision to follow this path. 
+
+The classification models we tested were Gradient Boosted Decision Trees, Logistic Regression, and Naive Bayes. With all of these models, Gradient Boosted Decision Trees and Naive Bayes were hard classifiers and Logistic Regression was a soft classifier. While the hard classifiers gave a definitive classification and performed marginally better (a one data point difference), Logistic Regression could provide both the classification and the probability that a point belonged to that class. Due to the nature of this problem and the fact that we want to minimize false negatives, a soft classification method would provide more information for NASA's scientists identifying the exoplanets because then the experts could set a confidence threshold that could adapt to new information. Thus, we chose to include Logistic Regression as the classification component of our final model. 
+
+As with any model, it may need updates as more data is available. There is also the possibility that NASA will modify their definition of what an exoplanet is and new classifications would reflect that. Thus, we would need to rerun our models on the new / updated data. This would most likely not be very often, but we believe our model is robust enough to handle changing data. 
