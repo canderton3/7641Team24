@@ -92,7 +92,7 @@ We implemented DBSCAN using Python's scikit-learn (sklearn) library, which has a
 
 ## Supervised
 
-### Gradient Decision Trees
+### Gradient Boosted Decision Trees
 Decision trees are one example of a supervised classification approach, utilizing a tree-like model to make decisions. Leaves of the tree represent the class labels while the branches are the 'decisions' or 'splits' of the features in order to get to the most accurate leaf. Gradient boosting can improve the performance of decision trees; it combines "weak" methods such as decision trees into ensembles. Trees are added one by one, to minimize the gradient boost loss function so each new tree has a better quality of fit than the previous tree.
 
 The main parameters to tune for this model are the learning rate and number of boosting stages to perform (the number of estimators). There are tradeoffs between these parameters; the learning rate can increase or decrease the "contribution" of each tree, so a larger learning rate value performing well may correspond to actually needing more estimators. We optimized these parameters using grid search with 10-fold cross validation to find the best combination. 
