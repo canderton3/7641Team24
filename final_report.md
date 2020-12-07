@@ -620,6 +620,7 @@ The confusion matrix with the results of XGBoost's predictions for the test set 
 By our observations, the model performs extremely well on the test set. Nearly all of the data points were classified correctly, also excluding only eight samples like the GradientBoostingClassifier. Once again, the eight data points misclassified are false negatives; the issues of which were addressed above. Like the GradientBoostingClassifier, we would be confident implementing this model as a part of our ML design pipeline. We would probably lean towards choosing XGBoost between the two for long term maintenance. If we were to rerun our models with a larger dataset, XGBoost would be more equipped to handle the larger dataset due to its optimization techniques under the hood.
 
 ## Logistic Regression
+Implementing the threshold / confidence value of logistic regression is more of an art than a technical process like the grid search mentioned in the gradient boosted decision tree process. We want to minimize false negatives, which would cause us to miss out on possible exoplanet candidates. Thus, we would choose a lower threshold that would then classify more planets as exoplanets than there actually are; this process would still cut down on the workload of NASA scientists classifying exoplanets while giving them a tool to help them focus their efforts.  The results for the hard classification using a threshold of 0.5 are below. 
 ![](images/log_reg_confusion_matrix.png)
 
 **Accuracy:** 99%
@@ -634,7 +635,7 @@ By our observations, the model performs extremely well on the test set. Nearly a
 
 **F1 Score:** 1
 
-Logistic regression presented a paralling result to the other supervised models the team had worked to create. While accuracy and precision were particularly high categories of the logisitic regression model, however it still managed to score higher on the false negative criterion. As described previously in other categories, it is important to the tema that we have a lower ratio of false negatives versus false positives due to external economic and labor constraints. Logisitic regression typically performs quite well, significantly better than most unsupevised models, however in respect to supervised modelling it also scores "better." Since the team is looking for fewer false negatives the logistic regression model performed quite well.
+Logistic regression presented results parallel to the other supervised models the team had worked to create. While accuracy and precision scored very well, the model also managed to score higher on the false negative criterion. As aforementioned, we are prioritizing minimizing false negatives, and logistic regression performs comparably. For real world application, it may be better to return the probabilities rather than the hard classification results, but hard classification allowed us to compare logistic regression to other models.
 
 ## Naive Bayes
 The confusion matrix for our Gaussian Naive Bayes model's predctions on the test set is below.
